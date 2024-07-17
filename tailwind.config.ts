@@ -52,6 +52,7 @@ const config = {
           accent: "hsl(var(--warning-accent))",
           foreground: "hsl(var(--warning-foreground))",
         },
+        purpleAccent : "#bcc0ff"
       },
       fontFamily: {
         sans: ["IBM Plex Sans", "sans-serif"],

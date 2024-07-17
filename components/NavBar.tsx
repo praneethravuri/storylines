@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import { ModeToggle } from "@/components/mode-toggle";
-import { Menu, X, Sparkles, UserRoundPen, Settings } from 'lucide-react';
+import { Menu, X, Sparkles, UserRoundPen, Settings, Map } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ const NavBar = () => {
   };
 
   const navItems = [
-    { href: "/storymap", icon: Sparkles, label: "StoryMap" },
+    { href: "/storymap", icon: Map, label: "StoryMap" },
     { href: "/profile", icon: UserRoundPen, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Settings" },
   ];
@@ -44,11 +45,10 @@ const NavBar = () => {
             <ul className="space-y-4">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link 
+                  <Link
                     href={item.href}
-                    className={`flex items-center space-x-2 hover:text-primary-accent ${
-                      pathname === item.href ? 'text-primary-accent' : ''
-                    }`}
+                    className={`flex items-center space-x-2 hover:text-primary-accent ${pathname === item.href ? 'text-primary-accent' : ''
+                      }`}
                     onClick={() => setIsOpen(false)}
                   >
                     <item.icon size={20} />
@@ -58,6 +58,12 @@ const NavBar = () => {
               ))}
             </ul>
           </nav>
+          <div className="create-story my-5">
+            <Button className="flex items-center w-full" variant="create">
+              <Sparkles className="mr-3" />
+              Create
+            </Button>
+          </div>
           <div className="mt-auto">
             <ModeToggle />
           </div>
