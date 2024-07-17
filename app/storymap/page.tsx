@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import FlowMap from './FlowMap';
 
 const page = () => {
   return (
-    <div>page</div>
+    <div className='overflow-y-hidden'>
+      <FlowMap />
+    </div>
   )
 }
 
