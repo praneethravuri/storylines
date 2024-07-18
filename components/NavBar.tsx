@@ -59,11 +59,12 @@ const NavBar = () => {
             </ul>
           </nav>
           <div className="create-story my-5">
-            <Button className="flex items-center w-full" variant="create">
+            <Link href="/create-story" className="flex items-center justify-center bg-purpleAccent p-2 rounded-lg transition duration-300 ease-in-out hover:bg-purple-500 text-black">
               <Sparkles className="mr-3" />
               Create
-            </Button>
+            </Link>
           </div>
+
           <div className="mt-auto">
             <ModeToggle />
           </div>
