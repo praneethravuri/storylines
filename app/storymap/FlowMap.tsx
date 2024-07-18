@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     ReactFlow,
     Controls,
@@ -12,25 +12,13 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Button } from '@/components/ui/button';
-import { CalendarDays, Heart, ThumbsDown, BadgePlus, Check, MoreHorizontal, X } from 'lucide-react';
-import Link from 'next/link';
-import NodeCard from '../../components/NodeCard';
+import NodeCard from "@/components/NodeCard"
 
 export interface NodeData {
     title: string;
     createdAt: string;
     creator: string;
 }
-
 
 
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
@@ -62,6 +50,7 @@ export default function FlowMap() {
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const [checkedNodes, setCheckedNodes] = useState<string[]>([]);
     const { theme } = useTheme();
 
     const updateNodePositions = () => {

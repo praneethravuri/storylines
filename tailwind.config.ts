@@ -21,38 +21,48 @@ const config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        border: "hsl(var(--border))",
+        card: "hsl(var(--card))",
+        "card-foreground": "hsl(var(--card-foreground))",
+        popover: "hsl(var(--popover))",
+        "popover-foreground": "hsl(var(--popover-foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          accent: "hsl(var(--primary-accent))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
-          accent: "hsl(var(--secondary-accent))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        error: {
-          DEFAULT: "hsl(var(--error))",
-          accent: "hsl(var(--error-accent))",
-          foreground: "hsl(var(--error-foreground))",
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+          foreground: "hsl(var(--tertiary-foreground))",
         },
-        info: {
-          DEFAULT: "hsl(var(--info))",
-          accent: "hsl(var(--info-accent))",
-          foreground: "hsl(var(--info-foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
-        success: {
-          DEFAULT: "hsl(var(--success))",
-          accent: "hsl(var(--success-accent))",
-          foreground: "hsl(var(--success-foreground))",
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+          muted: "hsl(var(--accent-muted))",
         },
-        warning: {
-          DEFAULT: "hsl(var(--warning))",
-          accent: "hsl(var(--warning-accent))",
-          foreground: "hsl(var(--warning-foreground))",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
-        purpleAccent : "#bcc0ff"
+        border: "hsl(var(--border))",
+        "node-card": "hsl(var(--node-card-background))",
+        "node-hr": "hsl(var(--node-hr))",
+        "floating-button": "hsl(var(--floating-button))",
+        "floating-button-muted": "hsl(var(--floating-button-muted))",
+        "chart-1": "hsl(var(--chart-1))",
+        "chart-2": "hsl(var(--chart-2))",
+        "chart-3": "hsl(var(--chart-3))",
+        "chart-4": "hsl(var(--chart-4))",
+        "chart-5": "hsl(var(--chart-5))",
+        "love-btn": "hsl(var(--love-btn))",
+        "check-btn": "hsl(var(--check-btn))",
+        "create-btn": "hsl(var(--create-btn))",
       },
       fontFamily: {
         sans: ["IBM Plex Sans", "sans-serif"],
