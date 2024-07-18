@@ -66,7 +66,7 @@ const CustomNode = ({ data }) => {
                     <span>{data.createdAt}</span>
                 </div>
             </div>
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-700">
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-zinc-700">
                 <Button
                     variant="ghost"
                     size="sm"
@@ -74,7 +74,7 @@ const CustomNode = ({ data }) => {
                 >
                     Read More
                 </Button>
-                <Link href="/" className="text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200">
+                <Link href="/" className="text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200 ">
                     John Doe
                 </Link>
             </div>
