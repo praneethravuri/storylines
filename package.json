@@ -12,11 +12,15 @@
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
+    "@types/mongoose": "^5.11.97",
     "@xyflow/react": "^12.0.2",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.7",
     "lucide-react": "^0.408.0",
+    "mongoose": "^8.5.1",
     "next": "14.2.5",
     "next-themes": "^0.3.0",
     "react": "^18",
@@ -33,6 +37,6 @@
     "postcss": "^8",
     "postcss-import": "^16.1.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.5.3"
   }
 }

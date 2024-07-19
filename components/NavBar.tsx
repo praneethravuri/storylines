@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { ModeToggle } from "@/components/mode-toggle";
-import { Menu, X, Map, Heart, Settings, LogOut } from 'lucide-react';
+import { Menu, X, Map, Heart, Settings, LogOut, BookOpenText } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ const NavBar = () => {
   };
 
   const navItems = [
+    { href: "/storymap", icon: BookOpenText, label: "Story Map" },
     { href: "/your-maps", icon: Map, label: "Your Maps" },
     { href: "/favourites", icon: Heart, label: "Favourites" },
     { href: "/settings", icon: Settings, label: "Settings" },
@@ -50,7 +51,7 @@ const NavBar = () => {
                     href={item.href}
                     className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-colors ${
                       pathname === item.href
-                        ? 'bg-accent text-tertiary'
+                        ? 'bg-accent-muted text-tertiary'
                         : 'text-secondary hover:bg-accent-muted hover:text-tertiary'
                     }`}
                     onClick={() => setIsOpen(false)}

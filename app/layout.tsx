@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/global.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import NavBar from "@/components/NavBar";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +27,7 @@ export default function RootLayout({
             <NavBar />
             <main className="flex-1 md:ml-64 h-screen overflow-hidden">
               {children}
+              <Toaster />
             </main>
           </div>
         </ThemeProvider>

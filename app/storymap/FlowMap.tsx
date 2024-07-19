@@ -17,7 +17,8 @@ import NodeCard from "@/components/NodeCard"
 export interface NodeData {
     title: string;
     createdAt: string;
-    creator: string;
+    author: string;
+    id: string
 }
 
 
@@ -25,9 +26,9 @@ const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
     return (
-        <>
+        <>  
             <Handle type="target" position={Position.Top} className="!bg-transparent" />
-            <NodeCard title={data.title} createdAt={data.createdAt} creator={data.creator} isDark={isDark} />
+            <NodeCard title={data.title} createdAt={data.createdAt} author={data.author} isDark={isDark} prev = {data.id} />
             <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
         </>
 
@@ -36,10 +37,10 @@ const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
 
 export default function FlowMap() {
     const initialNodes = [
-        { id: 'root', position: { x: 0, y: 0 }, data: { title: 'Root', creator: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
-        { id: '1', position: { x: 0, y: 0 }, data: { title: 'Node 1', creator: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
-        { id: '2', position: { x: 0, y: 0 }, data: { title: 'Node 2', creator: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
-        { id: '3', position: { x: 0, y: 0 }, data: { title: 'Node 3', creator: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
+        { id: 'root', position: { x: 0, y: 0 }, data: { title: 'Root', author: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
+        { id: '1', position: { x: 0, y: 0 }, data: { title: 'Node 1', author: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
+        { id: '2', position: { x: 0, y: 0 }, data: { title: 'Node 2', author: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
+        { id: '3', position: { x: 0, y: 0 }, data: { title: 'Node 3', author: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
     ];
 
     const initialEdges = [
@@ -60,10 +61,10 @@ export default function FlowMap() {
         const centerY = viewportHeight / 2;
         const nodeGap = 500; // Gap between nodes
         const updatedNodes = [
-            { id: 'root', position: { x: centerX - 75, y: centerY }, data: { title: 'Root', creator: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
-            { id: '1', position: { x: centerX - nodeGap, y: centerY - nodeGap }, data: { title: 'Node 1', creator: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
-            { id: '2', position: { x: centerX, y: centerY - nodeGap }, data: { title: 'Node 2', creator: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
-            { id: '3', position: { x: centerX + nodeGap, y: centerY - nodeGap }, data: { title: 'Node 3', creator: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
+            { id: 'root', position: { x: centerX - 75, y: centerY }, data: { title: 'Root', author: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
+            { id: '1', position: { x: centerX - nodeGap, y: centerY - nodeGap }, data: { title: 'Node 1', author: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
+            { id: '2', position: { x: centerX, y: centerY - nodeGap }, data: { title: 'Node 2', author: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
+            { id: '3', position: { x: centerX + nodeGap, y: centerY - nodeGap }, data: { title: 'Node 3', author: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
         ];
         setNodes(updatedNodes);
     };
