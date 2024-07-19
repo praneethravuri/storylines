@@ -18,14 +18,14 @@ export interface NodeData {
     title: string;
     createdAt: string;
     author: string;
-    id: string
+    id: string;
 }
 
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
     return (
-        <>  
+        <>
             <Handle type="target" position={Position.Top} className="!bg-transparent" />
             <NodeCard title={data.title} createdAt={data.createdAt} author={data.author} isDark={isDark} currId={data.id} />
             <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
@@ -58,7 +58,7 @@ export default function FlowMap() {
     };
 
     return (
-        <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }} >
+        <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
