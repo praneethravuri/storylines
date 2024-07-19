@@ -1,12 +1,9 @@
-"use client";
-import { useRouter } from 'next/navigation'
-import { useEffect } from "react";
+import React from 'react'
 
-export default function Home() {
-  const router = useRouter()
-  useEffect(() => {
-    router.push("/storymap")
-  }, [router]);
-  
-  return <div></div>;
+const page = () => {
+  return (
+    <div>page</div>
+  )
 }
+
+export default page

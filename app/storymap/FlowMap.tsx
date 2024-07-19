@@ -13,6 +13,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
 import NodeCard from './NodeCard';
+import ControlPanel from './ControlPanel';
 
 export interface NodeData {
     title: string;
@@ -56,7 +57,7 @@ export default function FlowMap() {
                 const response = await fetch('/api/get-stories');
                 const stories = await response.json();
                 const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
-                
+
                 setNodes(prevNodes => {
                     // Only update if there's a change to avoid unnecessary re-renders
                     if (JSON.stringify(prevNodes) !== JSON.stringify(constructedNodes)) {
@@ -64,7 +65,7 @@ export default function FlowMap() {
                     }
                     return prevNodes;
                 });
-                
+
                 setEdges(prevEdges => {
                     // Only update if there's a change to avoid unnecessary re-renders
                     if (JSON.stringify(prevEdges) !== JSON.stringify(constructedEdges)) {
@@ -91,6 +92,7 @@ export default function FlowMap() {
 
     return (
         <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -101,7 +103,8 @@ export default function FlowMap() {
                 nodeTypes={nodeTypes}
                 colorMode={theme === "dark" ? "dark" : "light"}
             >
-                <Controls />
+                <ControlPanel />
+                <Controls className='horizontal' />
                 <Background gap={12} size={1} />
             </ReactFlow>
         </div>

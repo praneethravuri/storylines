@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/global.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import NavBar from "@/components/NavBar";
 import { Toaster } from "@/components/ui/toaster";
+import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,9 +23,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex">
-            <NavBar />
-            <main className="flex-1 md:ml-64 h-screen overflow-hidden">
+          <div className="">
+            <main className="flex-1 h-screen">
+              <NavBar />
               {children}
               <Toaster />
             </main>
