@@ -54,7 +54,7 @@ export default function FlowMap() {
     useEffect(() => {
         const fetchStories = async () => {
             try {
-                const response = await fetch('/api/get-stories');
+                const response = await fetch('/api/fetch-all-stories');
                 const stories = await response.json();
                 const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
 

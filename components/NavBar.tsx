@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const NavBar = () => {
   return (
-    <div className="bg-background shadow-md fixed w-full top-0 z-50 p-4">
+    <div className="bg-background shadow-md w-full top-0 z-50 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="title">
           <p className="font-bold">StoryLines</p>

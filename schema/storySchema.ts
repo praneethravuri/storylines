@@ -23,7 +23,7 @@ const StorySchema: Schema = new Schema({
     prev: [{ type: String }],
     next: [{ type: String }],
     type: { type: String },
-    customId: {type: String}
+    customId: {type: String, unique: true, required: true}
 });
 
 let Story: Model<IStory>;
