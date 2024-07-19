@@ -88,6 +88,6 @@
   }
 
   p {
-    @apply text-lg leading-8
+    @apply text-lg leading-8 text-primary
   }
 }

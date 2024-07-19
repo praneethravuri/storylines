@@ -103,7 +103,7 @@ export default function FlowMap() {
                 nodeTypes={nodeTypes}
                 colorMode={theme === "dark" ? "dark" : "light"}
             >
-                <ControlPanel />
+                {/* <ControlPanel /> */}
                 <Controls className='horizontal' />
                 <Background gap={12} size={1} />
             </ReactFlow>

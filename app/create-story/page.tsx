@@ -85,11 +85,11 @@ const CreateStory = () => {
         <div className='p-10 w-full max-w-7xl'>
           <div className="space-y-8">
             <h1 className="text-3xl font-bold">Create your story</h1>
-            {currId && (
+            {/* {currId && (
               <p className="text-sm text-gray-400">
                 Creating a story connected to: {currId}
               </p>
-            )}
+            )} */}
             <form onSubmit={handleSubmit} className="space-y-4 border-t border-zinc-700 pt-8">
               <Input
                 className='border-none focus:outline-none text-4xl font-bold tracking-tight sm:text-6xl bg-transparent text-white placeholder-gray-500'
