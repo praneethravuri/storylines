@@ -12,7 +12,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
-import NodeCard from "@/components/NodeCard"
+import NodeCard from './NodeCard';
 
 export interface NodeData {
     title: string;
@@ -21,60 +21,31 @@ export interface NodeData {
     id: string
 }
 
-
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
     return (
         <>  
             <Handle type="target" position={Position.Top} className="!bg-transparent" />
-            <NodeCard title={data.title} createdAt={data.createdAt} author={data.author} isDark={isDark} prev = {data.id} />
+            <NodeCard title={data.title} createdAt={data.createdAt} author={data.author} isDark={isDark} currId={data.id} />
             <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
         </>
-
     );
 };
 
 export default function FlowMap() {
-    const initialNodes = [
-        { id: 'root', position: { x: 0, y: 0 }, data: { title: 'Root', author: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
-        { id: '1', position: { x: 0, y: 0 }, data: { title: 'Node 1', author: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
-        { id: '2', position: { x: 0, y: 0 }, data: { title: 'Node 2', author: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
-        { id: '3', position: { x: 0, y: 0 }, data: { title: 'Node 3', author: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
-    ];
-
-    const initialEdges = [
-        { id: 'e-root-1', source: '1', target: 'root', animated: true },
-        { id: 'e-root-2', source: '2', target: 'root', animated: true },
-        { id: 'e-root-3', source: '3', target: 'root', animated: true },
-    ];
-
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const [checkedNodes, setCheckedNodes] = useState<string[]>([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const { theme } = useTheme();
 
-    const updateNodePositions = () => {
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        const centerX = viewportWidth / 2;
-        const centerY = viewportHeight / 2;
-        const nodeGap = 500; // Gap between nodes
-        const updatedNodes = [
-            { id: 'root', position: { x: centerX - 75, y: centerY }, data: { title: 'Root', author: 'Admin', createdAt: '27 Apr 2020', likes: 40, dislikes: 20 }, type: 'custom' },
-            { id: '1', position: { x: centerX - nodeGap, y: centerY - nodeGap }, data: { title: 'Node 1', author: 'User 1', createdAt: '27 Apr 2020', likes: 60, dislikes: 30 }, type: 'custom' },
-            { id: '2', position: { x: centerX, y: centerY - nodeGap }, data: { title: 'Node 2', author: 'User 2', createdAt: '27 Apr 2020', likes: 70, dislikes: 10 }, type: 'custom' },
-            { id: '3', position: { x: centerX + nodeGap, y: centerY - nodeGap }, data: { title: 'Node 3', author: 'User 3', createdAt: '27 Apr 2020', likes: 50, dislikes: 25 }, type: 'custom' },
-        ];
-        setNodes(updatedNodes);
-    };
-
     useEffect(() => {
-        updateNodePositions();
-        window.addEventListener('resize', updateNodePositions);
-        return () => {
-            window.removeEventListener('resize', updateNodePositions);
-        };
+        fetch('/api/get-stories')
+            .then(response => response.json())
+            .then(data => {
+                setNodes(data.nodes);
+                setEdges(data.edges);
+            })
+            .catch(error => console.error('Error fetching stories:', error));
     }, []);
 
     const onConnect = useCallback(

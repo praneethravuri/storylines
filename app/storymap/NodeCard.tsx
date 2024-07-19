@@ -9,10 +9,10 @@ export interface NodeItems {
     title: string,
     author: string,
     createdAt: string,
-    prev: string
+    currId: string
 }
 
-const NodeCard: React.FC<NodeItems> = ({ isDark, title, author, createdAt, prev }) => {
+const NodeCard: React.FC<NodeItems> = ({ isDark, title, author, createdAt, currId }) => {
     return (
         <Card className={`w-72 p-6 rounded-2xl ${isDark ? 'bg-node-card text-foreground' : 'bg-background text-foreground'} shadow-lg relative overflow-visible border-0 transition-all duration-300 hover:shadow-xl hover:scale-105`}>
             <div className="absolute -top-3 -right-3 flex space-x-2">
@@ -25,7 +25,7 @@ const NodeCard: React.FC<NodeItems> = ({ isDark, title, author, createdAt, prev 
                     <Heart className={`w-4 h-4 ${isDark ? 'text-muted-foreground group-hover:text-love-btn' : 'text-muted-foreground group-hover:text-love-btn'} transition-colors duration-200`} />
                 </div>
                 {/* Button 3 */}
-                <Link href="/create-story" className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-floating-button hover:bg-floating-button-muted' : 'bg-muted hover:bg-muted-foreground'} transition-all duration-200 group shadow-lg hover:shadow-xl cursor-pointer`}>
+                <Link href={`/create-story?currId=${currId}`}  className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-floating-button hover:bg-floating-button-muted' : 'bg-muted hover:bg-muted-foreground'} transition-all duration-200 group shadow-lg hover:shadow-xl cursor-pointer`}>
                     <BadgePlus className={`w-4 h-4 ${isDark ? 'text-muted-foreground group-hover:text-create-btn' : 'text-muted-foreground group-hover:text-create-btn'} transition-colors duration-200`} />
                 </Link>
             </div>
@@ -35,7 +35,7 @@ const NodeCard: React.FC<NodeItems> = ({ isDark, title, author, createdAt, prev 
                 </h3>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <CalendarDays className="h-4 w-4" />
-                    <span>{createdAt} | {prev}</span>
+                    <span>{createdAt}</span>
                 </div>
             </div>
             <div className="flex items-center justify-between mt-6 pt-4 border-t border-node-hr">

@@ -9,8 +9,10 @@ export interface IStory extends Document {
     author: string;
     content: string;
     createdAt: Date;
-    prev: mongoose.Types.ObjectId[];
-    next: mongoose.Types.ObjectId[];
+    prev: string[];
+    next: string[];
+    type?: string;
+    customId: string;
 }
 
 const StorySchema: Schema = new Schema({
@@ -18,8 +20,10 @@ const StorySchema: Schema = new Schema({
     author: { type: String, required: true },
     content: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
-    prev: [{ type: Schema.Types.ObjectId, ref: 'Story' }],
-    next: [{ type: Schema.Types.ObjectId, ref: 'Story' }]
+    prev: [{ type: String }],
+    next: [{ type: String }],
+    type: { type: String },
+    customId: {type: String}
 });
 
 let Story: Model<IStory>;
