@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from "@/components/ui/card";
 import { CalendarDays, Heart, BadgePlus, Check } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import Story from '@/schema/storySchema';
 
 export interface NodeItems {
     isDark: boolean,
@@ -12,54 +12,40 @@ export interface NodeItems {
     currId: string
 }
 
-// Adjusted formatDate function
-const formatDate = (createdAt) => {
+const formatDate = (createdAt: string) => {
     const currDate = new Date(createdAt);
-
-    // Define options for formatting
-    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-
-    // Format the date
+    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
     return currDate.toLocaleDateString(undefined, options);
 }
 
 const NodeCard: React.FC<NodeItems> = ({ isDark, title, author, createdAt, currId }) => {
     return (
-        <Link href={`/stories/${currId}`}>
-            <Card className={`w-72 p-6 z-0 rounded-2xl ${isDark ? 'bg-node-card text-foreground' : 'bg-background text-foreground'} shadow-lg relative overflow-visible border-0 transition-all duration-300 hover:shadow-xl hover:scale-105`}>
-                <div className="absolute -top-3 -right-3 flex space-x-2">
-                    {/* Button 1 */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-floating-button hover:bg-floating-button-muted' : 'bg-muted hover:bg-muted-foreground'} transition-all duration-200 group shadow-lg hover:shadow-xl cursor-pointer`}>
-                        <Check className={`w-4 h-4 ${isDark ? 'text-muted-foreground group-hover:text-check-btn' : 'text-muted-foreground group-hover:text-check-btn'} transition-colors duration-200`} />
-                    </div>
-                    {/* Button 2 */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-floating-button hover:bg-floating-button-muted' : 'bg-muted hover:bg-muted-foreground'} transition-all duration-200 group shadow-lg hover:shadow-xl cursor-pointer`}>
-                        <Heart className={`w-4 h-4 ${isDark ? 'text-muted-foreground group-hover:text-love-btn' : 'text-muted-foreground group-hover:text-love-btn'} transition-colors duration-200`} />
-                    </div>
-                    {/* Button 3 */}
-                    <Link href={`/create-story?currId=${currId}`} className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-floating-button hover:bg-floating-button-muted' : 'bg-muted hover:bg-muted-foreground'} transition-all duration-200 group shadow-lg hover:shadow-xl cursor-pointer`}>
-                        <BadgePlus className={`w-4 h-4 ${isDark ? 'text-muted-foreground group-hover:text-create-btn' : 'text-muted-foreground group-hover:text-create-btn'} transition-colors duration-200`} />
-                    </Link>
+            <Card className={`w-72 p-4 rounded-xl ${isDark ? 'bg-surface-200 text-surface-100' : 'bg-surface-100 text-surface-800'} shadow-lg relative overflow-visible border-0 transition-all duration-300 hover:shadow-xl hover:scale-105`}>
+                <div className="absolute -top-2 -right-2 flex space-x-1">
+                    {['check', 'heart', 'plus'].map((icon, index) => (
+                        <Link key={icon} href={icon === 'plus' ? `/create-story?currId=${currId}` : '#'} className={`w-7 h-7 rounded-full flex items-center justify-center ${isDark ? 'bg-surface-300 hover:bg-surface-400' : 'bg-surface-200 hover:bg-surface-300'} transition-all duration-200 group shadow-md hover:shadow-lg cursor-pointer`}>
+                            {icon === 'check' && <Check className={`w-3.5 h-3.5 ${isDark ? 'text-surface-600 group-hover:text-primary-400' : 'text-surface-600 group-hover:text-primary-600'} transition-colors duration-200`} />}
+                            {icon === 'heart' && <Heart className={`w-3.5 h-3.5 ${isDark ? 'text-surface-600 group-hover:text-red-400' : 'text-surface-600 group-hover:text-red-600'} transition-colors duration-200`} />}
+                            {icon === 'plus' && <BadgePlus className={`w-3.5 h-3.5 ${isDark ? 'text-surface-600 group-hover:text-green-400' : 'text-surface-600 group-hover:text-green-600'} transition-colors duration-200`} />}
+                        </Link>
+                    ))}
                 </div>
-                <div className="flex flex-col items-start gap-4">
-                    <h3 className="text-xl font-bold leading-tight tracking-tight">
+                <div className="flex flex-col items-start gap-3">
+                    <h3 className="text-lg font-semibold leading-tight tracking-tight line-clamp-2 text-black dark:text-white">
                         {title}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CalendarDays className="h-4 w-4" />
+                    <div className="flex items-center gap-1.5 text-xs text-surface-500">
+                        <CalendarDays className="h-3.5 w-3.5" />
                         <span>{formatDate(createdAt)}</span>
                     </div>
                 </div>
-                <div className="flex items-center justify-between mt-6 pt-4 border-t border-node-hr">
-                    <Button variant="ghost">
-                        Read More
-                    </Button>
-                    <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200">
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-200 dark:border-surface-700">
+                    <Link href={`/stories/${currId}`} className='bg-primary-400  text-white dark:text-black p-2 rounded-full'>Read More</Link>
+                    <span className="text-sm font-medium text-surface-500 hover:text-surface-600 dark:hover:text-surface-600 transition-colors duration-200">
                         {author}
-                    </Link>
+                    </span>
                 </div>
             </Card>
-        </Link>
     );
 }
 
