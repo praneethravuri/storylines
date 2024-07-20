@@ -35,7 +35,7 @@ const Page = ({ params }: { params: { storyId: string } }) => {
 
   if (!storyDetails) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-900">
+      <div className="flex items-center justify-center h-screen">
         <div className="animate-pulse text-gray-400">Loading...</div>
       </div>
     );
