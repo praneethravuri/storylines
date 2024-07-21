@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/styles/global.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +24,6 @@ export default function RootLayout({
         >
           <div className="">
             <main className="flex-1 h-screen">
-              <NavBar />
               {children}
               <Toaster />
             </main>

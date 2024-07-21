@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 @layer base {
   :root {
@@ -91,16 +92,36 @@
   }
 }
 
-body {
-  letter-spacing: -0.5px;
-  font-weight: 400
-}
-
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
   body {
     @apply bg-background text-foreground;
+    letter-spacing: -0.5px;
+    font-weight: 400;
   }
+  * {
+    @apply border-border;
+  }
+
+}
+
+p{
+  letter-spacing: -0.01em;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+h1{
+  line-height: 1;
+  font-weight: 800;
+  font-size: 3.3rem;
+  letter-spacing: -0.01em;
+
+}
+
+.card-dark{
+  background-color: color-mix(in srgb, #d1cff4, #121212 90%);
 }
