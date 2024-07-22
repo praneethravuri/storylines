@@ -107,7 +107,7 @@
   }
 
   .nav-link {
-    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-200 text-xl;
   }
 
   .heading-primary {
