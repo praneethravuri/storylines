@@ -12,7 +12,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
-import NodeCard from './NodeCard';
+import NodeCard from '../../components/NodeCard';
 import ControlPanel from './ControlPanel';
 
 export interface NodeData {

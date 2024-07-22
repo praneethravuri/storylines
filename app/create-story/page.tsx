@@ -4,10 +4,11 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from '@/components/ui/use-toast';
+import { FaPen, FaSpinner } from 'react-icons/fa';
 
 const Loading = () => (
   <div className='flex justify-center items-center min-h-screen'>
-    <div className='text-white'>Loading...</div>
+    <FaSpinner className="animate-spin text-4xl text-primary" />
   </div>
 );
 
@@ -35,7 +36,7 @@ const CreateStory = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-   
+
     try {
       const response = await fetch('/api/create-story', {
         method: 'POST',
@@ -49,22 +50,20 @@ const CreateStory = () => {
           next: [],
         }),
       });
-      
+
       if (response.ok) {
         toast({
-          title: "Post created successfully"
+          title: "Story created successfully",
+          description: "Your tale has been added to the narrative tapestry.",
         });
         setTitle('');
         setContent('');
         setCharacterCount(0);
-        
-        // Redirect to /storymap
         router.push('/storymap');
       } else {
-        // Handle errors
         toast({
           title: "Failed to submit story",
-          description: "Please try again.",
+          description: "The quill faltered. Please try again.",
           variant: "destructive"
         });
       }
@@ -72,7 +71,7 @@ const CreateStory = () => {
       console.error('Error submitting story:', error);
       toast({
         title: "An error occurred",
-        description: "Please try again.",
+        description: "The pages remain blank. Please try again.",
         variant: "destructive"
       });
     }
@@ -80,40 +79,42 @@ const CreateStory = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className='flex flex-col items-center min-h-screen py-16'>
-        <div className='p-10 w-full max-w-7xl'>
-          <div className="space-y-8">
-            <h1 className="text-3xl font-bold">Create your story</h1>
-            {/* {currId && (
-              <p className="text-sm text-gray-400">
-                Creating a story connected to: {currId}
-              </p>
-            )} */}
-            <form onSubmit={handleSubmit} className="space-y-4 border-t border-zinc-700 pt-8">
-              <Input
-                className='border-none focus:outline-none text-4xl font-bold tracking-tight sm:text-6xl bg-transparent text-white placeholder-gray-500'
-                placeholder='Untitled'
-                style={{ caretColor: 'white' }}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+      <div className='flex justify-center items-center min-h-screen'>
+        <div className='p-10 w-full max-w-4xl rounded-lg shadow-2xl'>
+          <div className="space-y-8 relative">
+            <div className="flex items-center space-x-4">
+              <FaPen className="text-5xl text-primary" />
+              <h1 className="heading-primary">Craft Your Tale</h1>
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"></div>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="">
+                <Input
+                  className='border-none focus:outline-none text-4xl font-bold tracking-tight sm:text-6xl bg-transparent text-foreground placeholder-gray-500'
+                  placeholder='Once upon a time...'
+                  style={{ caretColor: 'white' }}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+
+              </div>
               <Textarea
-                rows={10}
-                className='border-none focus:outline-none w-full text-white bg-transparent'
-                placeholder='Write something'
+                rows={12}
+                className='border-none focus:outline-none w-full text-foreground rounded-lg p-4 text-lg'
+                placeholder='Your story unfolds here...'
                 onChange={handleTextChange}
                 maxLength={5000}
                 value={content}
               />
               <div className="flex justify-between items-center mt-4">
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-secondary-primary">
                   {characterCount}/5000 characters
                 </span>
                 <button
                   type="submit"
-                  className='btn btn-primary'
+                  className='btn btn-primary px-6 py-2 rounded-full'
                 >
-                  Publish
+                  Publish Your Tale
                 </button>
               </div>
             </form>
