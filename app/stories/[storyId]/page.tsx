@@ -1,17 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface StoryDetails {
-  title: string;
-  author: string;
-  content: string;
-  createdAt: Date;
-  prev: string[];
-  next: string[];
-  type?: string;
-  customId: string;
-}
+import { ChevronLeft, ChevronRight, Clock, User } from 'lucide-react';
+import Story from '@/schema/storySchema';
 
 interface NodeDetails {
   title: string;
@@ -20,27 +10,44 @@ interface NodeDetails {
   customId: string;
 }
 
-const StoryLink = ({ story, direction, onSelect }: { story: NodeDetails; direction: 'prev' | 'next'; onSelect: () => void }) => (
-  <div className="mb-4 p-4 border rounded-lg hover:shadow-md transition-shadow duration-300">
-    <div className="flex justify-between items-center mb-2">
-      <h3 className="text-lg font-semibold">{story.title}</h3>
-      {direction === 'prev' ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-    </div>
-    <p className="text-sm text-gray-600 mb-2">By {story.author}</p>
-    <div className="flex justify-between items-center">
-      <span className="text-sm text-gray-500">{new Date(story.createdAt).toLocaleDateString()}</span>
-      <button 
+const StoryCard = ({ story, direction, onSelect }: { story: NodeDetails; direction: 'prev' | 'next'; onSelect: () => void }) => (
+  <div className="bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+    <div className="p-5">
+      <h3 className="text-xl font-semibold mb-2 text-card-foreground">{story.title}</h3>
+      <div className="flex items-center text-sm text-muted-foreground mb-3">
+        <User size={16} className="mr-2" />
+        <span>{story.author}</span>
+      </div>
+      <div className="flex items-center text-sm text-muted-foreground mb-4">
+        <Clock size={16} className="mr-2" />
+        <span>{new Date(story.createdAt).toLocaleDateString()}</span>
+      </div>
+      <button
         onClick={onSelect}
-        className="btn btn-secondary"
+        className={`btn ${direction === 'prev' ? 'btn-secondary' : 'btn-primary'} w-full`}
       >
-        {direction === 'prev' ? 'Go Back' : 'Continue'}
+        {direction === 'prev' ? (
+          <>
+            <div className='flex justify-between items-center'>
+              <ChevronLeft size={20} className="mr-2" />
+              Go Back
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='flex justify-between items-center'>
+              Continue
+              <ChevronRight size={20} className="ml-2" />
+            </div>
+          </>
+        )}
       </button>
     </div>
   </div>
 );
 
 const Page = ({ params }: { params: { storyId: string } }) => {
-  const [storyDetails, setStoryDetails] = useState<StoryDetails | null>(null);
+  const [storyDetails, setStoryDetails] = useState<Story | null>(null);
   const [prevStories, setPrevStories] = useState<NodeDetails[]>([]);
   const [nextStories, setNextStories] = useState<NodeDetails[]>([]);
 
@@ -49,7 +56,7 @@ const Page = ({ params }: { params: { storyId: string } }) => {
       try {
         const response = await fetch(`/api/fetch-one-story?storyId=${params.storyId}`);
         if (response.ok) {
-          const data: StoryDetails = await response.json();
+          const data: Story = await response.json();
           setStoryDetails(data);
 
           const fetchLinkedStories = async (ids: string[]) => {
@@ -59,6 +66,7 @@ const Page = ({ params }: { params: { storyId: string } }) => {
 
           if (data.prev.length > 0) {
             const prevStoriesData = await fetchLinkedStories(data.prev);
+            console.log(JSON.stringify(prevStoriesData))
             setPrevStories(prevStoriesData);
           }
 
@@ -82,54 +90,67 @@ const Page = ({ params }: { params: { storyId: string } }) => {
 
   if (!storyDetails) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-pulse text-gray-400">Loading...</div>
+      <div className="flex items-center justify-center h-screen bg-background">
+        <div className="animate-pulse text-foreground text-2xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Previous Stories</h2>
-        {prevStories.length > 0 ? (
-          prevStories.map((story, index) => (
-            <StoryLink
-              key={index}
-              story={story}
-              direction="prev"
-              onSelect={() => handleSelectStory(story.customId)}
-            />
-          ))
-        ) : (
-          <p className="text-gray-500">This is the beginning of the story.</p>
-        )}
-      </div>
+    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-4xl">
+        <main className="bg-card shadow-xl rounded-lg overflow-hidden mb-12">
+          <div className="p-8">
+            <h1 className="text-4xl font-bold mb-4 text-card-foreground">{storyDetails.title}</h1>
+            <div className="flex items-center text-muted-foreground mb-6">
+              <User size={20} className="mr-2" />
+              <span>{storyDetails.author}</span>
+            </div>
+            <div className="prose dark:prose-invert max-w-none">
+              <p className="text-card-foreground leading-relaxed whitespace-pre-line">
+                {storyDetails.content}
+              </p>
+            </div>
+          </div>
+        </main>
 
-      <main className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">{storyDetails.title}</h1>
-        <p className="text-gray-500 mb-4">By {storyDetails.author}</p>
-        <div className="p-6 rounded-lg shadow-lg">
-          <p className="text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line">
-            {storyDetails.content}
-          </p>
-        </div>
-      </main>
-
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Continue the story</h2>
-        {nextStories.length > 0 ? (
-          nextStories.map((story, index) => (
-            <StoryLink
-              key={index}
-              story={story}
-              direction="next"
-              onSelect={() => handleSelectStory(story.customId)}
-            />
-          ))
-        ) : (
-          <p className="text-gray-500">This story has reached its conclusion.</p>
-        )}
+        <section className="mb-12">
+          <h2 className="heading-landing mb-8 text-center">Story Timeline</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="heading-medium mb-4">Previous Stories</h3>
+              {prevStories.length > 0 ? (
+                prevStories.map((story, index) => (
+                  <div key={index} className="mb-4">
+                    <StoryCard
+                      story={story}
+                      direction="prev"
+                      onSelect={() => handleSelectStory(story.customId)}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="text-muted-foreground italic">This is the beginning of the story.</p>
+              )}
+            </div>
+            <div>
+              <h3 className="heading-medium mb-4">Continue the Story</h3>
+              {nextStories.length > 0 ? (
+                nextStories.map((story, index) => (
+                  <div key={index} className="mb-4">
+                    <StoryCard
+                      story={story}
+                      direction="next"
+                      onSelect={() => handleSelectStory(story.customId)}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="text-muted-foreground italic">This story has reached its conclusion.</p>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

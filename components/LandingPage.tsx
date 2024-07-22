@@ -62,7 +62,7 @@ const Hero = () => (
         <FaStar className="size-5" />
       </OrbitingCircles>
       <OrbitingCircles
-        className="size-[30px] bg-secondary/30 text-foreground border border-secondary/40"
+        className="size-[30px] bg-primary/10 text-foreground border border-secondary/40"
         duration={20}
         delay={10}
         radius={80}
@@ -72,7 +72,7 @@ const Hero = () => (
 
       {/* Outer Circles (reverse) */}
       <OrbitingCircles
-        className="size-[50px] bg-accent/20 text-blue-400 border border-accent/30"
+        className="size-[50px] bg-primary/10 text-blue-400 border border-accent/30"
         radius={190}
         duration={20}
         reverse
@@ -80,7 +80,7 @@ const Hero = () => (
         <FaUsers className="size-6" />
       </OrbitingCircles>
       <OrbitingCircles
-        className="size-[50px] bg-muted/30 text-emerald-400 border border-muted/40"
+        className="size-[50px] bg-primary/10 text-emerald-400 border border-muted/40"
         radius={190}
         duration={20}
         delay={20}
@@ -129,8 +129,8 @@ const Inspiration = () => (
   <section className="container py-20 relative overflow-hidden">
     <div className="">
       <h1 className="heading-landing mb-4 text-center">
-        The new era of<br />
-        <span className="text-primary">Storytelling</span>
+        Go down the<br />
+        <span className="text-primary">Rabbit hole</span>
       </h1>
       <p className="paragraph-primary mb-8 max-w-2xl mx-auto text-center">
         Where technology meets creativity, and every reader becomes a writer. Join us in redefining the art of narrative.
@@ -170,7 +170,8 @@ const Footer = () => (
     </div>
     <div className="container mx-auto mt-8 text-center text-sm text-muted-foreground">
       <p>&copy; 2024 StoryLines. All rights reserved.</p>
-      <p>Made by Praneeth Ravuri</p>
+      <p>Made by <span><Link href="https://www.praneethravuri.com/" className='underline text-primary font-semibold decoration-dashed' target='_blank'>Praneeth Ravuri</Link></span></p>
+      
     </div>
   </footer>
 );
