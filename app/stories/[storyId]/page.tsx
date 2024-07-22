@@ -1,7 +1,19 @@
 "use client";
+
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock, User } from 'lucide-react';
 import Story from '@/schema/storySchema';
+
+interface StoryData {
+  title: string;
+  author: string;
+  content: string;
+  createdAt: string;
+  prev: string[];
+  next: string[];
+  type?: string;
+  customId: string;
+}
 
 interface NodeDetails {
   title: string;
@@ -27,19 +39,15 @@ const StoryCard = ({ story, direction, onSelect }: { story: NodeDetails; directi
         className={`btn ${direction === 'prev' ? 'btn-secondary' : 'btn-primary'} w-full`}
       >
         {direction === 'prev' ? (
-          <>
-            <div className='flex justify-between items-center'>
-              <ChevronLeft size={20} className="mr-2" />
-              Go Back
-            </div>
-          </>
+          <div className='flex justify-between items-center'>
+            <ChevronLeft size={20} className="mr-2" />
+            Go Back
+          </div>
         ) : (
-          <>
-            <div className='flex justify-between items-center'>
-              Continue
-              <ChevronRight size={20} className="ml-2" />
-            </div>
-          </>
+          <div className='flex justify-between items-center'>
+            Continue
+            <ChevronRight size={20} className="ml-2" />
+          </div>
         )}
       </button>
     </div>
@@ -47,7 +55,7 @@ const StoryCard = ({ story, direction, onSelect }: { story: NodeDetails; directi
 );
 
 const Page = ({ params }: { params: { storyId: string } }) => {
-  const [storyDetails, setStoryDetails] = useState<Story | null>(null);
+  const [storyDetails, setStoryDetails] = useState<StoryData | null>(null);
   const [prevStories, setPrevStories] = useState<NodeDetails[]>([]);
   const [nextStories, setNextStories] = useState<NodeDetails[]>([]);
 
@@ -56,17 +64,17 @@ const Page = ({ params }: { params: { storyId: string } }) => {
       try {
         const response = await fetch(`/api/fetch-one-story?storyId=${params.storyId}`);
         if (response.ok) {
-          const data: Story = await response.json();
+          const data: StoryData = await response.json();
           setStoryDetails(data);
 
-          const fetchLinkedStories = async (ids: string[]) => {
+          const fetchLinkedStories = async (ids: string[]): Promise<NodeDetails[]> => {
             const responses = await Promise.all(ids.map(id => fetch(`/api/fetch-one-story?storyId=${id}`)));
-            return await Promise.all(responses.map(res => res.json()));
+            const stories: StoryData[] = await Promise.all(responses.map(res => res.json()));
+            return stories.map(({ title, author, createdAt, customId }) => ({ title, author, createdAt, customId }));
           };
 
           if (data.prev.length > 0) {
             const prevStoriesData = await fetchLinkedStories(data.prev);
-            console.log(JSON.stringify(prevStoriesData))
             setPrevStories(prevStoriesData);
           }
 
