@@ -3,7 +3,7 @@ import LandingPage from '@/components/LandingPage';
 
 const page = () => {
   return (
-    <div>
+    <div className=''>
       <LandingPage />
     </div>
   )

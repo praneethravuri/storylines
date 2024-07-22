@@ -1,0 +1,64 @@
+/* LandingPage.module.css */
+.landingPage {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
+  }
+  
+  .landingPage::before,
+  .landingPage::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+  }
+  
+  .landingPage::before {
+    background: var(--third-glow);
+    width: 50vw;
+    height: 50vw;
+    margin-left: -200px;
+    top: calc(50vh - 50vw / 2);
+    left: calc(50vw);
+    animation: animateBefore 3s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+  }
+  
+  .landingPage::after {
+    background: var(--secondary-glow);
+    width: 500px;
+    height: 700px;
+    top: calc(50vh - 50vw / 2);
+    left: calc(50vw - 50vw / 2);
+    animation: animateAfter 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+  }
+  
+  @keyframes animateBefore {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(200px) scale(0.8);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes animateAfter {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-250px) scale(1.2);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  

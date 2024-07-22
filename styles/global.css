@@ -26,6 +26,20 @@
     --input: 240 5.9% 90%;
     --ring: 252 56% 57%;
     --radius: 0.5rem;
+
+    --secondary-glow: conic-gradient(from 10deg at 50% 50%,
+        #eb7494 0deg,
+        #ae77b2 55deg,
+        #97b5da 120deg,
+        #0099ca 160deg,
+        transparent 360deg);
+
+    --third-glow: conic-gradient(from 90deg at 50% 50%,
+        #ff8b7e 0deg,
+        #e24e6b 160deg,
+        #7ed2da 120deg,
+        #8bdce0 55deg,
+        transparent 360deg);
   }
 
   .dark {
@@ -82,12 +96,12 @@
     @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
   }
 
-  .nav-link {
-    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
+  .btn-icon{
+    @apply p-2 rounded-full hover:bg-accent
   }
 
-  .card {
-    @apply bg-card text-card-foreground rounded-lg shadow-md p-6;
+  .nav-link {
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
   }
 
   .heading-primary {
@@ -103,10 +117,23 @@
   }
 
   .paragraph-secondary {
-    @apply text-sm text-muted-foreground;
+    @apply text-base font-medium text-muted-foreground;
   }
 
   .icon-primary {
-    @apply text-primary w-12 h-12;
+    @apply text-foreground w-7 h-7;
   }
+
+  .link-primary{
+    @apply text-2xl font-bold
+  }
+
+  .node-card-dark{
+    background-color: color-mix(in srgb, #d1cff4, #121212 90%);
+  }
+
+  .node-card-light{
+    background-color: color-mix(in srgb, #d1cff4, #ffffff 90%);
+  }
+
 }

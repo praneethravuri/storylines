@@ -1,31 +1,30 @@
 import React from 'react';
 import Link from 'next/link';
-import { Github, ArrowRight, Pickaxe, BookOpenText, Route } from 'lucide-react';
+import { FaArrowRight, FaPencilAlt, FaRegCompass, FaGithub, FaDiscord } from 'react-icons/fa';
+import { TbRouteSquare } from "react-icons/tb";
 import ThemeToggle from './ThemeToggle';
+import styles from "@/styles/Landingpage.module.css";
 
 const cardContent = [
-  { icon: Pickaxe, title: "Create", tagline: "Craft your own stories or add new chapters to existing tales." },
-  { icon: BookOpenText, title: "Explore", tagline: "Dive into new stories and discover captivating narratives created by others." },
-  { icon: Route, title: "Navigate", tagline: "Choose your path and explore different storylines and possibilities." },
+  { icon: FaPencilAlt, title: "Create", tagline: "Craft your own stories or add new chapters to existing tales." },
+  { icon: FaRegCompass, title: "Explore", tagline: "Dive into new stories and discover captivating narratives created by others." },
+  { icon: TbRouteSquare, title: "Navigate", tagline: "Choose your path and explore different storylines and possibilities." },
 ];
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    // TODO: ${styles.landingPage} add this to parent div for glow effect and remove card background & shadow in global.css
+    <div className={`min-h-screen`}>
       <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 border-b">
         <div className="flex items-center space-x-4 sm:space-x-6">
-          <span className="text-2xl font-bold">StoryLines</span>
-          <nav>
-            <ul className="flex space-x-4">
-              <li><Link href="/" className="nav-link">Home</Link></li>
-              <li><Link href="/discover" className="nav-link">About</Link></li>
-            </ul>
-          </nav>
+          <Link href="/" className='link-primary'>StoryLines</Link>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-4">
+          {/* TODO: Change to auth links */}
           <button className="btn btn-secondary">Sign In</button>
           <button className="btn btn-primary">Register</button>
-          <button className="p-2 rounded-full hover:bg-accent"><Github className="w-5 h-5" /></button>
+          <button className="btn-icon"><FaGithub className="icon-primary" /></button>
+          <button className="btn-icon"><FaDiscord className="icon-primary" /></button>
           <ThemeToggle />
         </div>
       </header>
@@ -43,7 +42,7 @@ const LandingPage = () => {
               Learn more
             </button>
             <Link href="/storymap" className="btn btn-outline group">
-              Get started <ArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
+              Get started <FaArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
