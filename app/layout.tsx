@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/global.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from 'next-themes';
+import NavBar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NavBar />
         {children}
         <Toaster />
         </ThemeProvider>

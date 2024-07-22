@@ -3,7 +3,6 @@ import React, { useState, FormEvent, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { useToast } from '@/components/ui/use-toast';
 
 const Loading = () => (
@@ -110,12 +109,12 @@ const CreateStory = () => {
                 <span className="text-sm text-gray-400">
                   {characterCount}/5000 characters
                 </span>
-                <Button
+                <button
                   type="submit"
-                  className='text-tertiary bg-accent-muted hover:bg-accent-muted'
+                  className='btn btn-primary'
                 >
                   Publish
-                </Button>
+                </button>
               </div>
             </form>
           </div>

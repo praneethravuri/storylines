@@ -96,10 +96,6 @@
     @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
   }
 
-  .btn-icon{
-    @apply p-2 rounded-full hover:bg-accent
-  }
-
   .nav-link {
     @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
   }
@@ -121,19 +117,27 @@
   }
 
   .icon-primary {
-    @apply text-foreground w-7 h-7;
+    @apply text-foreground w-8 h-8;
   }
 
-  .link-primary{
+  .icon-secondary {
+    @apply  w-5 h-5;
+  }
+
+  .link-primary {
     @apply text-2xl font-bold
   }
 
-  .node-card-dark{
+  .node-card-dark {
     background-color: color-mix(in srgb, #d1cff4, #121212 90%);
   }
 
-  .node-card-light{
+  .node-card-light {
     background-color: color-mix(in srgb, #d1cff4, #ffffff 90%);
+  }
+
+  .node-card {
+    @apply w-72 p-4 rounded-xl shadow-md relative overflow-visible border-border transition-all duration-300 hover:shadow-xl hover:scale-105
   }
 
 }

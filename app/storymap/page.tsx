@@ -3,7 +3,7 @@ import FlowMap from './FlowMap';
 
 const page = () => {
   return (
-    <div>
+    <div className=''>
       <FlowMap />
     </div>
   )

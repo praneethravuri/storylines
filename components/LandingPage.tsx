@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaArrowRight, FaPencilAlt, FaRegCompass, FaGithub, FaDiscord } from 'react-icons/fa';
+import { FaArrowRight, FaPencilAlt, FaRegCompass } from 'react-icons/fa';
 import { TbRouteSquare } from "react-icons/tb";
-import ThemeToggle from './ThemeToggle';
 import styles from "@/styles/Landingpage.module.css";
 
 const cardContent = [
@@ -15,19 +14,6 @@ const LandingPage = () => {
   return (
     // TODO: ${styles.landingPage} add this to parent div for glow effect and remove card background & shadow in global.css
     <div className={`min-h-screen`}>
-      <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 border-b">
-        <div className="flex items-center space-x-4 sm:space-x-6">
-          <Link href="/" className='link-primary'>StoryLines</Link>
-        </div>
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          {/* TODO: Change to auth links */}
-          <button className="btn btn-secondary">Sign In</button>
-          <button className="btn btn-primary">Register</button>
-          <button className="btn-icon"><FaGithub className="icon-primary" /></button>
-          <button className="btn-icon"><FaDiscord className="icon-primary" /></button>
-          <ThemeToggle />
-        </div>
-      </header>
       <main className="container mx-auto px-4 py-12 sm:py-16">
         <div className="text-center mb-12">
           <h1 className="heading-primary mb-4">
