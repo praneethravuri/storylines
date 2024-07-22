@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaArrowRight, FaPencilAlt, FaRegCompass, FaQuestion } from 'react-icons/fa';
+import { FaArrowRight, FaPencilAlt, FaRegCompass, FaMap, FaUsers, FaStar, FaComments } from 'react-icons/fa';
 import { TbRouteSquare } from "react-icons/tb";
 import styles from "@/styles/Landingpage.module.css";
 import {
-  Accordion,
-  AccordionContent,
+  Accordion, AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
+import OrbitingCircles from '@/components/magicui/orbiting-circles';
 
 const cardContent = [
   { icon: FaPencilAlt, title: "Create", tagline: "Unleash your imagination and bring stories to life" },
@@ -17,7 +17,7 @@ const cardContent = [
 ];
 
 const faqContent = [
-  { 
+  {
     question: "What makes this platform unique?",
     answer: "Our platform combines collaborative storytelling with choose-your-own-adventure elements, offering a truly immersive and interactive writing experience."
   },
@@ -45,15 +45,54 @@ const LandingPage = () => {
 };
 
 const Hero = () => (
-  <main className="container min-h-screen flex flex-col justify-center items-center w-full text-center py-20 relative overflow-hidden">
-    <h1 className="heading-landing mb-4 ">
-      Write your tales <br />
-      <span className="text-primary">Weave your own adventures</span>
-    </h1>
-    <p className="paragraph-primary mb-8 max-w-2xl mx-auto">
+  <main className="container min-h-screen flex flex-col justify-center items-center w-full text-center relative overflow-hidden">
+    <div className="relative flex h-[450px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+      <h1 className="heading-landing mb-4 relative z-10">
+        Write your tales <br />
+        <span className="text-primary">Weave your own adventures</span>
+      </h1>
+
+      {/* Inner Circles */}
+      <OrbitingCircles
+        className="size-[30px] bg-primary/10 text-pink-400 border border-primary/20"
+        duration={20}
+        delay={20}
+        radius={80}
+      >
+        <FaStar className="size-5" />
+      </OrbitingCircles>
+      <OrbitingCircles
+        className="size-[30px] bg-secondary/30 text-foreground border border-secondary/40"
+        duration={20}
+        delay={10}
+        radius={80}
+      >
+        <FaComments className="size-5" />
+      </OrbitingCircles>
+
+      {/* Outer Circles (reverse) */}
+      <OrbitingCircles
+        className="size-[50px] bg-accent/20 text-blue-400 border border-accent/30"
+        radius={190}
+        duration={20}
+        reverse
+      >
+        <FaUsers className="size-6" />
+      </OrbitingCircles>
+      <OrbitingCircles
+        className="size-[50px] bg-muted/30 text-emerald-400 border border-muted/40"
+        radius={190}
+        duration={20}
+        delay={20}
+        reverse
+      >
+        <FaMap className="size-6" />
+      </OrbitingCircles>
+    </div>
+    <p className="paragraph-primary mb-8 max-w-2xl mx-auto relative z-10">
       Embark on a literary journey where your imagination knows no bounds. Create, collaborate, and captivate!
     </p>
-    <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+    <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10">
       <button className="btn btn-primary">Learn more</button>
       <Link href="/storymap" className="btn btn-outline group">
         Get started <FaArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
@@ -82,6 +121,7 @@ const Features = () => (
         </div>
       ))}
     </div>
+
   </section>
 );
 
@@ -120,7 +160,6 @@ const Footer = () => (
     <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
       <div className="mb-8 md:mb-0">
         <h2 className="text-2xl font-bold">StoryLines</h2>
-        <p className="text-sm text-muted-foreground">Crafting tales, one chapter at a time</p>
       </div>
       <nav className="flex flex-wrap justify-center md:justify-end">
         <Link href="/about" className="mx-3 nav-link">About</Link>
