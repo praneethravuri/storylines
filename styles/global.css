@@ -28,18 +28,28 @@
     --radius: 0.5rem;
 
     --secondary-glow: conic-gradient(from 10deg at 50% 50%,
-        #eb7494 0deg,
-        #ae77b2 55deg,
-        #97b5da 120deg,
-        #0099ca 160deg,
+        #ff9ab8 0deg,
+        /* Light Pink */
+        #b28ed9 55deg,
+        /* Light Purple */
+        #97d1e8 120deg,
+        /* Light Blue */
+        #00c7de 160deg,
+        /* Cyan */
         transparent 360deg);
+
 
     --third-glow: conic-gradient(from 90deg at 50% 50%,
         #ff8b7e 0deg,
+        /* Coral */
         #e24e6b 160deg,
+        /* Bright Pink */
         #7ed2da 120deg,
+        /* Teal */
         #8bdce0 55deg,
+        /* Aqua */
         transparent 360deg);
+
   }
 
   .dark {
@@ -108,6 +118,10 @@
     @apply text-2xl font-semibold text-foreground mb-2;
   }
 
+  .heading-landing {
+    @apply text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight
+  }
+
   .paragraph-primary {
     @apply text-lg sm:text-xl text-muted-foreground tracking-tight;
   }
@@ -121,7 +135,7 @@
   }
 
   .icon-secondary {
-    @apply  w-5 h-5;
+    @apply w-5 h-5;
   }
 
   .link-primary {
@@ -141,3 +155,4 @@
   }
 
 }
+

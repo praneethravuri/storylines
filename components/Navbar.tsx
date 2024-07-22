@@ -9,7 +9,7 @@ const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full z-50 transition-all duration-300 border-b">
+    <nav className="w-full z-50 transition-all duration-300 border-b bg-transparent">
       <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-4 sm:space-x-6">
           <Link href="/" className="link-primary">StoryLines</Link>
