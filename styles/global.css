@@ -128,3 +128,7 @@
     @apply w-72 p-4 rounded-xl shadow-md relative overflow-visible border-border transition-all duration-300 hover:shadow-xl hover:scale-105
   }
 }
+
+.react-flow__panel{
+  transform: translateX(110%);
+}

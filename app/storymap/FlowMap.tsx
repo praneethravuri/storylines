@@ -213,6 +213,7 @@ export default function FlowMap() {
           favoritedStories={favoritedStories} 
           removeStory={removeStory} 
           controls = {<Controls className='horizontal' />}
+          
         />
         <Background gap={12} size={1} />
       </ReactFlow>

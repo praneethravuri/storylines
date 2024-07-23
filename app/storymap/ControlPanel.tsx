@@ -2,12 +2,14 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from 'next/link';
+import { useTheme } from "next-themes";
 
-const StoryList = ({ stories, removeStory, type }) => (
+const StoryList = ({ stories, removeStory, type, isDark }) => (
+
     <div className="mb-6 w-full">
         <div className="overflow-y-auto">
             {stories.map((story) => (
-                <Link href={`/stories/${story.id}`} key={story.id} className="bg-accent rounded-md p-3 mb-3 relative group flex items-center">
+                <Link href={`/stories/${story.id}`} key={story.id} className={`rounded-md p-3 mb-3 relative group flex items-center ${isDark ? 'node-card-dark' : 'node-card-light'}`}>
                     <button
                         onClick={(e) => {
                             e.stopPropagation();
@@ -32,8 +34,10 @@ const StoryList = ({ stories, removeStory, type }) => (
 );
 
 const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls }) => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
     return (
-        <div className="fixed inset-x-0 bottom-0 sm:top-[calc(50%+2rem)] sm:-translate-y-1/2 z-50 p-4 w-full sm:w-80 md:w-96 h-[60vh] sm:h-[80vh] bg-background border-t sm:border sm:rounded-lg border-accent-muted shadow-lg flex flex-col items-center mx-5">
+        <div className="fixed inset-x-0 bottom-0 sm:top-[calc(50%+2rem)] sm:-translate-y-1/2 z-50 p-4 w-full sm:w-80 md:w-96 h-[60vh] sm:h-[80vh] bg-background border-t sm:border sm:rounded-lg border-accent-muted shadow-lg flex flex-col items-center sm:mx-5">
             <div className="flex-grow overflow-y-auto space-y-4 w-full max-w-[400px]">
                 <Tabs defaultValue="favorite" className="w-full">
                     <TabsList className="w-full">
@@ -45,6 +49,7 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
                             stories={selectedStories}
                             removeStory={removeStory}
                             type="selected"
+                            isDark = {isDark}
                         />
                     </TabsContent>
                     <TabsContent value="favorite">
@@ -52,11 +57,14 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
                             stories={favoritedStories}
                             removeStory={removeStory}
                             type="favorited"
+                            isDark = {isDark}
                         />
                     </TabsContent>
                 </Tabs>
             </div>
-            {controls}
+            <div className="w-full flex justify-center bg-red-100">
+                {controls}
+            </div>
         </div>
     );
 };
