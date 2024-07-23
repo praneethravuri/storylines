@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { FaGithub, FaDiscord } from 'react-icons/fa';
-import { Menu, X } from 'lucide-react';
+import { IoMdMenu } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 import ThemeToggle from './ThemeToggle';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -34,7 +35,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full z-50 transition-all duration-300 border-b bg-transparent">
+    <nav className="w-full z-50 transition-all duration-300 border-b backdrop-blur-3xl">
       <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-4 sm:space-x-6">
           <Link href="/" className="link-primary">StoryLines</Link>
@@ -46,7 +47,7 @@ const NavBar = () => {
           <ThemeToggle />
         </div>
         <button className="md:hidden btn-icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <RxCross1 size={24} /> : <IoMdMenu size={24} />}
         </button>
       </header>
 
