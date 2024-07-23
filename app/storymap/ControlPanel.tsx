@@ -3,9 +3,9 @@ import { X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from 'next/link';
 import { useTheme } from "next-themes";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const StoryList = ({ stories, removeStory, type, isDark }) => (
-
     <div className="mb-6 w-full">
         <div className="overflow-y-auto">
             {stories.map((story) => (
@@ -39,7 +39,7 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
     return (
         <div className="fixed inset-x-0 bottom-0 sm:top-[calc(50%+2rem)] sm:-translate-y-1/2 z-50 p-4 w-full sm:w-80 md:w-96 h-[60vh] sm:h-[80vh] bg-background border-t sm:border sm:rounded-lg border-accent-muted shadow-lg flex flex-col items-center sm:mx-5">
             <div className="flex-grow overflow-y-auto space-y-4 w-full max-w-[400px]">
-                <Tabs defaultValue="favorite" className="w-full">
+                <Tabs defaultValue="selected" className="w-full">
                     <TabsList className="w-full">
                         <TabsTrigger value="selected" className="flex-1">Selected Stories</TabsTrigger>
                         <TabsTrigger value="favorite" className="flex-1">Favorite Stories</TabsTrigger>
@@ -49,7 +49,7 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
                             stories={selectedStories}
                             removeStory={removeStory}
                             type="selected"
-                            isDark = {isDark}
+                            isDark={isDark}
                         />
                     </TabsContent>
                     <TabsContent value="favorite">
@@ -57,13 +57,23 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
                             stories={favoritedStories}
                             removeStory={removeStory}
                             type="favorited"
-                            isDark = {isDark}
+                            isDark={isDark}
                         />
                     </TabsContent>
                 </Tabs>
             </div>
-            <div className="w-full flex justify-center bg-red-100">
-                {controls}
+            <div className="w-full mt-4 space-y-8">
+                {selectedStories.length > 0 && (
+                    <div className="flex justify-center mt-6">
+                        <Link href="#" className="btn btn-primary flex items-center space-x-2">
+                            <FaWandMagicSparkles />
+                            <span>Generate</span>
+                        </Link>
+                    </div>
+                )}
+                <div className="w-full flex justify-center mt-6">
+                    {controls}
+                </div>
             </div>
         </div>
     );
