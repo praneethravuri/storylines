@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock, User } from 'lucide-react';
-import Story from '@/schema/storySchema';
+import LoadingScreen from '@/components/LoadingScreen';
 
 interface StoryData {
   title: string;
@@ -58,10 +58,12 @@ const Page = ({ params }: { params: { storyId: string } }) => {
   const [storyDetails, setStoryDetails] = useState<StoryData | null>(null);
   const [prevStories, setPrevStories] = useState<NodeDetails[]>([]);
   const [nextStories, setNextStories] = useState<NodeDetails[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchStoryDetails = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch(`/api/fetch-one-story?storyId=${params.storyId}`);
         if (response.ok) {
           const data: StoryData = await response.json();
@@ -87,6 +89,8 @@ const Page = ({ params }: { params: { storyId: string } }) => {
         }
       } catch (error) {
         console.error("Error fetching story details:", error);
+      } finally {
+        setIsLoading(false)
       }
     };
     fetchStoryDetails();
@@ -96,16 +100,12 @@ const Page = ({ params }: { params: { storyId: string } }) => {
     window.location.href = `/stories/${customId}`;
   };
 
-  if (!storyDetails) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-background">
-        <div className="animate-pulse text-foreground text-2xl">Loading...</div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+    isLoading ? (
+      <LoadingScreen />
+    ) : (
+      <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-4xl">
         <main className="bg-card shadow-xl rounded-lg overflow-hidden mb-12">
           <div className="p-8">
@@ -161,6 +161,7 @@ const Page = ({ params }: { params: { storyId: string } }) => {
         </section>
       </div>
     </div>
+    )
   );
 };
 

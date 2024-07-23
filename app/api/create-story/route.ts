@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req: NextRequest) {
     try {
-        const { title, content, prev, next } = await req.json();
+        const { title, content, prev, next, type } = await req.json();
         
         // Connect to the database
         await connectToDB();
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
             content,
             prev,
             next: [],
-            type: "",
+            type: type || "",
             customId
         });
         

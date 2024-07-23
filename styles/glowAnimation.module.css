@@ -1,5 +1,5 @@
 /* LandingPage.module.css */
-.landingPage {
+.glowAnimation {
     position: relative;
     overflow: hidden;
     min-height: 100vh;
@@ -7,8 +7,8 @@
     color: var(--foreground);
   }
   
-  .landingPage::before,
-  .landingPage::after {
+  .glowAnimation::before,
+  .glowAnimation::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -19,7 +19,7 @@
     will-change: transform;
   }
   
-  .landingPage::before {
+  .glowAnimation::before {
     background: var(--third-glow);
     width: 50vw;
     height: 50vw;
@@ -29,7 +29,7 @@
     animation: animateBefore 3s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
   }
   
-  .landingPage::after {
+  .glowAnimation::after {
     background: var(--secondary-glow);
     width: 500px;
     height: 700px;

@@ -79,40 +79,35 @@ const CreateStory = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className='flex justify-center items-center min-h-screen'>
-        <div className='p-10 w-full max-w-4xl rounded-lg shadow-2xl'>
-          <div className="space-y-8 relative">
+      <div className='flex justify-center items-center min-h-screen bg-gray-50'>
+        <div className='p-8 w-full max-w-2xl bg-white shadow-lg rounded-lg border border-gray-200'>
+          <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <FaPen className="text-5xl text-primary" />
-              <h1 className="heading-primary">Craft Your Tale</h1>
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"></div>
+              <FaPen className="text-4xl text-primary" />
+              <h1 className="text-3xl font-semibold text-gray-800">Craft Your Tale</h1>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="">
-                <Input
-                  className='border-none focus:outline-none text-4xl font-bold tracking-tight sm:text-6xl bg-transparent text-foreground placeholder-gray-500'
-                  placeholder='Once upon a time...'
-                  style={{ caretColor: 'white' }}
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-
-              </div>
+              <Input
+                className='w-full border-gray-300 rounded-lg focus:border-primary focus:ring-primary'
+                placeholder='Once upon a time...'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <Textarea
-                rows={12}
-                className='border-none focus:outline-none w-full text-foreground rounded-lg p-4 text-lg'
+                rows={10}
+                className='w-full border-gray-300 rounded-lg focus:border-primary focus:ring-primary'
                 placeholder='Your story unfolds here...'
                 onChange={handleTextChange}
                 maxLength={5000}
                 value={content}
               />
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-sm text-secondary-primary">
+              <div className="flex justify-between items-center text-gray-600">
+                <span className="text-sm">
                   {characterCount}/5000 characters
                 </span>
                 <button
                   type="submit"
-                  className='btn btn-primary px-6 py-2 rounded-full'
+                  className='px-6 py-2 bg-primary text-white rounded-full hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary'
                 >
                   Publish Your Tale
                 </button>

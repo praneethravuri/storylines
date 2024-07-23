@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FaArrowRight, FaRegCompass, FaMap, FaUsers, FaStar, FaComments, FaPencilAlt, FaBookReader, FaRandom, FaLightbulb, FaTrophy, FaHeart } from 'react-icons/fa';
 import { TbRouteSquare, TbArrowFork } from "react-icons/tb";
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
-import styles from "@/styles/Landingpage.module.css";
+import styles from "@/styles/glowAnimation.module.css"
 import {
   Accordion, AccordionContent,
   AccordionItem,
@@ -13,7 +13,7 @@ import OrbitingCircles from '@/components/magicui/orbiting-circles';
 
 const LandingPage = () => {
   return (
-    <div className={`min-h-screen ${styles.landingPage}`}>
+    <div className={`min-h-screen ${styles.glowAnimation}`}>
       <Hero />
       <Features />
       <StoryExperience />

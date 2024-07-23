@@ -26,7 +26,6 @@ const NavBar = () => {
     } else {
       return (
         <>
-          <Link href="/dashboard" className={`nav-link ${isActive('/dashboard') ? '' : ''}`}>Dashboard</Link>
           <Link href="/profile" className={`nav-link ${isActive('/profile') ? '' : ''}`}>Profile</Link>
           <Link href="/settings" className={`nav-link ${isActive('/settings') ? '' : ''}`}>Settings</Link>
         </>
