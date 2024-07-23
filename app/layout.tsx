@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from 'next-themes';
 import NavBar from "@/components/Navbar";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,8 +20,9 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NavBar />
-        {children}
-        <Toaster />
+          {children}
+          <Analytics />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
