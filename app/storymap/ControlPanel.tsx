@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from 'next/link';
 import { useTheme } from "next-themes";
 import { FaWandMagicSparkles } from "react-icons/fa6";
+import { useRouter } from 'next/navigation';
 
 const StoryList = ({ stories, removeStory, type, isDark }) => (
     <div className="mb-6 w-full">
@@ -36,6 +37,13 @@ const StoryList = ({ stories, removeStory, type, isDark }) => (
 const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls }) => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
+    const router = useRouter();
+
+    const handleGenerate = () => {
+        const storiesParam = encodeURIComponent(JSON.stringify(selectedStories));
+        router.push(`/generated-stories?stories=${storiesParam}`);
+    };
+
     return (
         <div className="fixed inset-x-0 bottom-0 sm:top-[calc(50%+2rem)] sm:-translate-y-1/2 z-50 p-4 w-full sm:w-80 md:w-96 h-[60vh] sm:h-[80vh] bg-background border-t sm:border sm:rounded-lg border-accent-muted shadow-lg flex flex-col items-center sm:mx-5">
             <div className="flex-grow overflow-y-auto space-y-4 w-full max-w-[400px]">
@@ -65,10 +73,10 @@ const ControlPanel = ({ selectedStories, favoritedStories, removeStory, controls
             <div className="w-full mt-4 space-y-8">
                 {selectedStories.length > 0 && (
                     <div className="flex justify-center mt-6">
-                        <Link href="#" className="btn btn-primary flex items-center space-x-2">
+                        <button onClick={handleGenerate} className="btn btn-primary flex items-center space-x-2">
                             <FaWandMagicSparkles />
                             <span>Generate</span>
-                        </Link>
+                        </button>
                     </div>
                 )}
                 <div className="w-full flex justify-center mt-6">

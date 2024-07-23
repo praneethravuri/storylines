@@ -76,7 +76,7 @@ const Hero = () => (
 );
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
-  <div className="flex flex-col items-center p-6 bg-card rounded-xl shadow-lg">
+  <div className="flex flex-col items-center p-6 rounded-xl">
     <Icon className="text-primary text-4xl mb-4" />
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p className="text-center text-muted-foreground">{description}</p>
@@ -114,7 +114,7 @@ const Features = () => (
 );
 
 const ExperienceCard = ({ icon: Icon, title, description }) => (
-  <div className="flex flex-col items-center p-6 bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+  <div className="flex flex-col items-center p-6">
     <Icon className="text-primary text-4xl mb-4" />
     <h3 className="text-xl font-semibold mb-2 text-center">{title}</h3>
     <p className="text-center text-muted-foreground">{description}</p>
@@ -123,8 +123,7 @@ const ExperienceCard = ({ icon: Icon, title, description }) => (
 
 const StoryExperience = () => (
   <section className="container py-20 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl blur-3xl"></div>
-    <div className="relative bg-background/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+    <div className="relative bg-background/80 backdrop-blur-sm ">
       <h2 className="heading-landing text-center mb-12">Experience the <span className="text-primary">Story Revolution</span></h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <ExperienceCard
@@ -151,7 +150,7 @@ const StoryExperience = () => (
 );
 
 const InspirationCard = ({ icon: Icon, title, description }) => (
-  <div className="flex items-center p-6 bg-card rounded-xl shadow-lg">
+  <div className="flex items-center p-6">
     <Icon className="text-primary text-3xl mr-4" />
     <div>
       <h3 className="text-lg font-semibold mb-1">{title}</h3>
