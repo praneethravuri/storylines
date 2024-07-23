@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import {  FaArrowRight, FaRegCompass, FaMap, FaUsers, FaStar, FaComments, FaPencilAlt, FaBookReader, FaRandom, FaLightbulb, FaTrophy, FaHeart } from 'react-icons/fa';
+import { FaArrowRight, FaRegCompass, FaMap, FaUsers, FaStar, FaComments, FaPencilAlt, FaBookReader, FaRandom, FaLightbulb, FaTrophy, FaHeart } from 'react-icons/fa';
 import { TbRouteSquare, TbArrowFork } from "react-icons/tb";
+import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import styles from "@/styles/Landingpage.module.css";
 import {
   Accordion, AccordionContent,
@@ -18,6 +19,7 @@ const LandingPage = () => {
       <StoryExperience />
       <Inspiration />
       <FAQ />
+      <GitHubContribution />
       <Footer />
     </div>
   );
@@ -76,7 +78,7 @@ const Hero = () => (
 );
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
-  <div className="flex flex-col items-center p-6 bg-card rounded-xl shadow-lg">
+  <div className="flex flex-col items-center p-6">
     <Icon className="text-primary text-4xl mb-4" />
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p className="text-center text-muted-foreground">{description}</p>
@@ -114,7 +116,7 @@ const Features = () => (
 );
 
 const ExperienceCard = ({ icon: Icon, title, description }) => (
-  <div className="flex flex-col items-center p-6 bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+  <div className="flex flex-col items-center p-6">
     <Icon className="text-primary text-4xl mb-4" />
     <h3 className="text-xl font-semibold mb-2 text-center">{title}</h3>
     <p className="text-center text-muted-foreground">{description}</p>
@@ -123,8 +125,7 @@ const ExperienceCard = ({ icon: Icon, title, description }) => (
 
 const StoryExperience = () => (
   <section className="container py-20 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl blur-3xl"></div>
-    <div className="relative bg-background/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+    <div className="">
       <h2 className="heading-landing text-center mb-12">Experience the <span className="text-primary">Story Revolution</span></h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <ExperienceCard
@@ -151,7 +152,7 @@ const StoryExperience = () => (
 );
 
 const InspirationCard = ({ icon: Icon, title, description }) => (
-  <div className="flex items-center p-6 bg-card rounded-xl shadow-lg">
+  <div className="flex items-center p-6 bg-card">
     <Icon className="text-primary text-3xl mr-4" />
     <div>
       <h3 className="text-lg font-semibold mb-1">{title}</h3>
@@ -198,6 +199,23 @@ const Inspiration = () => (
     </div>
   </section>
 );
+
+const GitHubContribution = () => (
+  <section className="container py-20 relative overflow-hidden">
+    <div className="text-center mb-16">
+      <h1 className="heading-landing mb-4">
+        StoryLines is <span className="text-primary">Open Source</span>
+      </h1>
+      <p className="paragraph-primary mb-8 max-w-2xl mx-auto">
+        We believe in the power of open-source. Learning and sharing knowledge are essential for growth and innovation. Join us and contribute to a community that values collaboration and transparency. Together, we can achieve more.
+      </p>
+      <Link href="https://github.com/praneethravuri/storylines" target='_blank' className="btn btn-outline group">
+        Contribute to StoryLines <ArrowTopRightIcon className="inline-block ml-2 group-hover:translate-x-1 group-hover:-translate-y-1    transition-transform" />
+      </Link>
+    </div>
+  </section>
+)
+
 
 const FAQ = () => (
   <section className="container py-20">
