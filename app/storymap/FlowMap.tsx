@@ -1,115 +1,225 @@
 "use client";
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import {
-    ReactFlow,
-    Controls,
-    Background,
-    useNodesState,
-    useEdgesState,
-    addEdge,
-    Handle,
-    Position,
+  ReactFlow,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  Handle,
+  Position,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
-import NodeCard from '../../components/NodeCard';
+import NodeCard from './NodeCard';
 import ControlPanel from './ControlPanel';
 
 export interface NodeData {
-    title: string;
-    createdAt: string;
-    author: string;
-    id: string;
+  title: string;
+  createdAt: string;
+  author: string;
+  id: string;
+  isSelected: boolean;
+  isFavorited: boolean;
+  onSelect: (id: string) => void;
+  onFavorite: (id: string) => void;
 }
 
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
-    const { theme } = useTheme();
-    const isDark = theme === 'dark';
-    return (
-        <>
-            <Handle type="target" position={Position.Top} className="!bg-transparent" />
-            <NodeCard title={data.title} createdAt={data.createdAt} author={data.author} isDark={isDark} currId={data.id} />
-            <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
-        </>
-    );
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  return (
+    <>
+      <Handle type="target" position={Position.Top} className="!bg-transparent" />
+      <NodeCard
+        title={data.title}
+        createdAt={data.createdAt}
+        author={data.author}
+        isDark={isDark}
+        currId={data.id}
+        isSelected={data.isSelected}
+        isFavorited={data.isFavorited}
+        onSelect={data.onSelect}
+        onFavorite={data.onFavorite}
+      />
+      <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
+    </>
+  );
 };
 
 export default function FlowMap() {
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const { theme } = useTheme();
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { theme } = useTheme();
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const [selectedStoryIds, setSelectedStoryIds] = useState(new Set<string>());
+  const [favoritedStoryIds, setFavoritedStoryIds] = useState(new Set<string>());
 
-    useEffect(() => {
-        const updateScreenSize = () => {
-            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-        };
+  const selectedStories = useMemo(() => {
+    return nodes.filter(node => selectedStoryIds.has(node.id)).map(node => node.data);
+  }, [nodes, selectedStoryIds]);
 
-        updateScreenSize();
-        window.addEventListener('resize', updateScreenSize);
+  const favoritedStories = useMemo(() => {
+    return nodes.filter(node => favoritedStoryIds.has(node.id)).map(node => node.data);
+  }, [nodes, favoritedStoryIds]);
 
-        return () => window.removeEventListener('resize', updateScreenSize);
-    }, []);
-
-    useEffect(() => {
-        const fetchStories = async () => {
-            try {
-                const response = await fetch('/api/fetch-all-stories');
-                const stories = await response.json();
-                const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
-
-                setNodes(prevNodes => {
-                    // Only update if there's a change to avoid unnecessary re-renders
-                    if (JSON.stringify(prevNodes) !== JSON.stringify(constructedNodes)) {
-                        return constructedNodes;
-                    }
-                    return prevNodes;
-                });
-
-                setEdges(prevEdges => {
-                    // Only update if there's a change to avoid unnecessary re-renders
-                    if (JSON.stringify(prevEdges) !== JSON.stringify(constructedEdges)) {
-                        return constructedEdges;
-                    }
-                    return prevEdges;
-                });
-            } catch (error) {
-                console.error('Error fetching stories:', error);
-            }
-        };
-
-        fetchStories();
-    }, [screenSize, setNodes, setEdges]);
-
-    const onConnect = useCallback(
-        (params: any) => setEdges((eds) => addEdge(params, eds)),
-        [setEdges],
-    );
-
-    const nodeTypes = {
-        custom: CustomNode,
+  useEffect(() => {
+    const updateScreenSize = () => {
+      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     };
 
-    return (
-        <div style={{ width: '100vw', height: 'calc(100vh - 75px)', overflow: 'hidden' }}>
+    updateScreenSize();
+    window.addEventListener('resize', updateScreenSize);
 
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-                fitView
-                nodeTypes={nodeTypes}
-                colorMode={theme === "dark" ? "dark" : "light"}
-            >
-                {/* <ControlPanel /> */}
-                <Controls className='horizontal' />
-                <Background gap={12} size={1} />
-            </ReactFlow>
-        </div>
+    return () => window.removeEventListener('resize', updateScreenSize);
+  }, []);
+
+  const onSelect = useCallback((id: string) => {
+    setSelectedStoryIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+
+    setNodes(nds =>
+      nds.map(node => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isSelected: !node.data.isSelected,
+            },
+          };
+        }
+        return node;
+      })
     );
+  }, [setNodes]);
+
+  const onFavorite = useCallback((id: string) => {
+    setFavoritedStoryIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+
+    setNodes(nds =>
+      nds.map(node => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isFavorited: !node.data.isFavorited,
+            },
+          };
+        }
+        return node;
+      })
+    );
+  }, [setNodes]);
+
+  const removeStory = useCallback((id: string, type: 'selected' | 'favorited') => {
+    if (type === 'selected') {
+      setSelectedStoryIds(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(id);
+        return newSet;
+      });
+    } else {
+      setFavoritedStoryIds(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(id);
+        return newSet;
+      });
+    }
+
+    setNodes(nds =>
+      nds.map(node => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              [type === 'selected' ? 'isSelected' : 'isFavorited']: false,
+            },
+          };
+        }
+        return node;
+      })
+    );
+  }, [setNodes]);
+
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const response = await fetch('/api/fetch-all-stories');
+        const stories = await response.json();
+        const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
+
+        setNodes(constructedNodes.map(node => ({
+          ...node,
+          data: {
+            ...node.data,
+            isSelected: false,
+            isFavorited: false,
+            onSelect: onSelect,
+            onFavorite: onFavorite
+          }
+        })));
+
+        setEdges(constructedEdges);
+      } catch (error) {
+        console.error('Error fetching stories:', error);
+      }
+    };
+
+    fetchStories();
+  }, [screenSize, setNodes, setEdges, onSelect, onFavorite]);
+
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges],
+  );
+
+  const nodeTypes = {
+    custom: CustomNode,
+  };
+
+  return (
+    <div style={{ width: '100vw', height: 'calc(100vh - 75px)', overflow: 'hidden' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        fitView
+        nodeTypes={nodeTypes}
+        colorMode={theme === "dark" ? "dark" : "light"}
+      >
+        <ControlPanel 
+          selectedStories={selectedStories} 
+          favoritedStories={favoritedStories} 
+          removeStory={removeStory} 
+          controls = {<Controls className='horizontal' />}
+        />
+        <Background gap={12} size={1} />
+      </ReactFlow>
+    </div>
+  );
 }
+
 
 function constructNodesAndEdges(stories: any[], screenSize: { width: number, height: number }) {
     const constructedNodes: any[] = [];

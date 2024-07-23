@@ -17,8 +17,6 @@ const NavBar = () => {
       return (
         <>
           <div className='flex justify-between items-center space-x-4'>
-            <Link href="/about" className={`nav-link ${isActive('/about') ? '' : ''}`}>About</Link>
-            <Link href="/features" className={`nav-link ${isActive('/features') ? '' : ''}`}>Features</Link>
             <button className="btn btn-secondary">Sign In</button>
             <button className="btn btn-primary">Register</button>
           </div>
