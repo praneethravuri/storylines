@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 @layer base {
-  @layer base {
     :root {
       --background: 0 0% 100%;
       --foreground: 240 10% 3.9%;
@@ -13,7 +12,7 @@
       --card-foreground: 240 10% 3.9%;
       --popover: 0 0% 100%;
       --popover-foreground: 240 10% 3.9%;
-      --primary: 146 50% 36%;
+      --primary: 275 100% 50%;
       --primary-foreground: 0 0% 100%;
       --secondary: 240 4.8% 95.9%;
       --secondary-foreground: 240 5.9% 10%;
@@ -25,28 +24,25 @@
       --destructive-foreground: 0 0% 98%;
       --border: 240 5.9% 90%;
       --input: 240 5.9% 90%;
-      --ring: 146 50% 36%;
+      --ring: 275 100% 50%;
       --radius: 0.5rem;
-      --secondary-glow: conic-gradient(from 10deg at 50% 50%,
-          #ffd700 0deg,
-          /* Gold */
-          #ff69b4 55deg,
-          /* Hot Pink */
-          #00ced1 120deg,
-          /* Dark Turquoise */
-          #9932cc 160deg,
-          /* Dark Orchid */
-          transparent 360deg);
-      --third-glow: conic-gradient(from 90deg at 50% 50%,
-          #ff4500 0deg,
-          /* Orange Red */
-          #32cd32 160deg,
-          /* Lime Green */
-          #1e90ff 120deg,
-          /* Dodger Blue */
-          #ff1493 55deg,
-          /* Deep Pink */
-          transparent 360deg);
+      --secondary-glow: conic-gradient(
+        from 10deg at 50% 50%,
+        #eb7494 0deg,
+        #ae77b2 55deg,
+        #97b5da 120deg,
+        #0099ca 160deg,
+        transparent 360deg
+      );
+    
+      --third-glow: conic-gradient(
+        from 90deg at 50% 50%,
+        #ff8b7e 0deg,
+        #e24e6b 160deg,
+        #7ed2da 120deg,
+        #8bdce0 55deg,
+        transparent 360deg
+      );
     }
 
     .dark {
@@ -56,7 +52,7 @@
       --card-foreground: 0 0% 98%;
       --popover: 240 10% 3.9%;
       --popover-foreground: 0 0% 98%;
-      --primary: 146 50% 36%;
+      --primary: 275 100% 50%;
       --primary-foreground: 0 0% 100%;
       --secondary: 240 3.7% 15.9%;
       --secondary-foreground: 0 0% 98%;
@@ -68,7 +64,7 @@
       --destructive-foreground: 0 0% 98%;
       --border: 240 3.7% 15.9%;
       --input: 240 3.7% 15.9%;
-      --ring: 146 50% 36%;
+      --ring: 275 100% 50%;
     }
   }
 
@@ -85,7 +81,6 @@
   * {
     @apply border-border;
   }
-}
 
 
 @layer components {
