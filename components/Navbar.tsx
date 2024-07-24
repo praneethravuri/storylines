@@ -14,12 +14,11 @@ const NavBar = () => {
   const isActive = (href: string) => pathname === href;
 
   const renderNavLinks = () => {
-    if (pathname === "/") {
+    if (pathname === "/" || pathname === "/sign-in") {
       return (
         <>
           <div className='flex justify-between items-center space-x-4'>
-            <button className="btn btn-secondary">Sign In</button>
-            <button className="btn btn-primary">Register</button>
+            <Link href="/sign-in" className='btn btn-secondary'>Sign In</Link>
           </div>
         </>
       );
@@ -34,7 +33,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full z-50 transition-all duration-300 border-b backdrop-blur-3xl">
+    <nav className="w-full fixed z-50 transition-all duration-300 border-b backdrop-blur-3xl">
       <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-4 sm:space-x-6">
           <Link href="/" className="link-primary">StoryLines</Link>
