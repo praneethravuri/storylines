@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
+import {SunIcon, MoonIcon} from "@radix-ui/react-icons"
 
 const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
@@ -14,10 +14,10 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-full bg-primary text-primary-foreground"
+      className="rounded-full text-foreground"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      {theme === 'dark' ? <SunIcon className="w-7 h-7" /> : <MoonIcon className="w-7 h-7" />}
     </button>
   );
 };
