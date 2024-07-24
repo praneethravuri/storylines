@@ -79,35 +79,35 @@ const CreateStory = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className='flex justify-center items-center min-h-screen bg-gray-50'>
-        <div className='p-8 w-full max-w-2xl bg-white shadow-lg rounded-lg border border-gray-200'>
-          <div className="space-y-6">
+      <div className='flex justify-center items-center min-h-screen bg-background'>
+        <div className='p-8 w-full max-w-2xl bg-card rounded-lg shadow-lg border border-border'>
+          <div className="space-y-8">
             <div className="flex items-center space-x-4">
-              <FaPen className="text-4xl text-primary" />
-              <h1 className="text-3xl font-semibold text-gray-800">Craft Your Tale</h1>
+              <FaPen className="icon-primary text-primary" />
+              <h1 className="heading-secondary">Craft Your Tale</h1>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <Input
-                className='w-full border-gray-300 rounded-lg focus:border-primary focus:ring-primary'
+                className='w-full bg-background text-foreground placeholder-muted-foreground px-5 py-10'
                 placeholder='Once upon a time...'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
               <Textarea
                 rows={10}
-                className='w-full border-gray-300 rounded-lg focus:border-primary focus:ring-primary'
+                className='w-full bg-background text-foreground placeholder-muted-foreground resize-none p-5'
                 placeholder='Your story unfolds here...'
                 onChange={handleTextChange}
                 maxLength={5000}
                 value={content}
               />
-              <div className="flex justify-between items-center text-gray-600">
-                <span className="text-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">
                   {characterCount}/5000 characters
                 </span>
                 <button
                   type="submit"
-                  className='px-6 py-2 bg-primary text-white rounded-full hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='btn btn-primary'
                 >
                   Publish Your Tale
                 </button>
