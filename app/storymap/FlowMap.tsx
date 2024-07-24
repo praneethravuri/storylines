@@ -220,7 +220,7 @@ export default function FlowMap() {
             </button>
           </div>
         ) : (
-          <div style={{ width: '100vw', height: 'calc(100vh - 75px)', overflow: 'hidden' }}>
+          <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
             <ReactFlow
               nodes={nodes}
               edges={edges}

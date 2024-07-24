@@ -137,7 +137,7 @@
   }
 
   .node-card-dark {
-    background-color: color-mix(in srgb, #9500FF, #121212 90%);
+    background-color: color-mix(in srgb, #9500FF, #121212 97%);
   }
 
   .node-card-light {
