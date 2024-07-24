@@ -12,7 +12,7 @@
       --card-foreground: 240 10% 3.9%;
       --popover: 0 0% 100%;
       --popover-foreground: 240 10% 3.9%;
-      --primary: 275 100% 50%;
+      --primary: 275 100% 50%; /* Purple shade */
       --primary-foreground: 0 0% 100%;
       --secondary: 240 4.8% 95.9%;
       --secondary-foreground: 240 5.9% 10%;
@@ -24,7 +24,7 @@
       --destructive-foreground: 0 0% 98%;
       --border: 240 5.9% 90%;
       --input: 240 5.9% 90%;
-      --ring: 275 100% 50%;
+      --ring: 275 100% 50%; /* Purple shade */
       --radius: 0.5rem;
       --secondary-glow: conic-gradient(
         from 10deg at 50% 50%,
@@ -52,7 +52,7 @@
       --card-foreground: 0 0% 98%;
       --popover: 240 10% 3.9%;
       --popover-foreground: 0 0% 98%;
-      --primary: 275 100% 50%;
+      --primary: 275 100% 50%; /* Purple shade */
       --primary-foreground: 0 0% 100%;
       --secondary: 240 3.7% 15.9%;
       --secondary-foreground: 0 0% 98%;
@@ -64,7 +64,7 @@
       --destructive-foreground: 0 0% 98%;
       --border: 240 3.7% 15.9%;
       --input: 240 3.7% 15.9%;
-      --ring: 275 100% 50%;
+      --ring: 275 100% 50%; /* Purple shade */
     }
   }
 
@@ -137,11 +137,11 @@
   }
 
   .node-card-dark {
-    background-color: color-mix(in srgb, #2E8B57, #121212 90%);
+    background-color: color-mix(in srgb, #9500FF, #121212 90%);
   }
 
   .node-card-light {
-    background-color: color-mix(in srgb, #2E8B57, #ffffff 90%);
+    background-color: color-mix(in srgb, #9500FF, #ffffff 90%);
   }
 
   .node-card {

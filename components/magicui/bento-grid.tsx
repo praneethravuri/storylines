@@ -42,12 +42,12 @@ const BentoCard = ({
     className={cn(
       "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
       // light styles
-      "bg-white [box-shadow:0_0_0_1px_rgba(46,138,86,0.5),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+      "bg-white border",
       // dark styles
       "dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)]",
-      // Added green inner shadow for both light and dark modes
-      "[box-shadow:inset_0_-20px_80px_-20px_rgba(46,138,86,0.2)]",
-      "dark:[box-shadow:inset_0_-20px_80px_-20px_rgba(46,138,86,0.2)]",
+      // Added purple inner shadow for both light and dark modes
+      // "[box-shadow:inset_0_-20px_80px_-20px_rgba(128,0,128,0.2)]",
+      // "dark:[box-shadow:inset_0_-20px_80px_-20px_rgba(128,0,128,0.2)]",
       className,
     )}
   >
