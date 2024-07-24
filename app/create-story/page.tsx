@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from '@/components/ui/use-toast';
 import { FaPen, FaSpinner } from 'react-icons/fa';
+import { SidebarNav } from "@/components/SidebarNav"
 
 const Loading = () => (
   <div className='flex justify-center items-center min-h-screen'>
@@ -78,45 +79,53 @@ const CreateStory = () => {
   };
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className='flex justify-center items-center min-h-screen bg-background'>
-        <div className='p-8 w-full max-w-2xl bg-card rounded-lg shadow-lg border border-border'>
-          <div className="space-y-8">
-            <div className="flex items-center space-x-4">
-              <FaPen className="icon-primary text-primary" />
-              <h1 className="heading-secondary">Craft Your Tale</h1>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <Input
-                className='w-full bg-background text-foreground placeholder-muted-foreground px-5 py-10'
-                placeholder='Once upon a time...'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <Textarea
-                rows={10}
-                className='w-full bg-background text-foreground placeholder-muted-foreground resize-none p-5'
-                placeholder='Your story unfolds here...'
-                onChange={handleTextChange}
-                maxLength={5000}
-                value={content}
-              />
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  {characterCount}/5000 characters
-                </span>
-                <button
-                  type="submit"
-                  className='btn btn-primary'
-                >
-                  Publish Your Tale
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+    <div className='h-screen flex'>
+      <div className='flex-shrink-0'>
+        <SidebarNav />
       </div>
-    </Suspense>
+      <div className='flex-grow overflow-auto'>
+        <Suspense fallback={<Loading />}>
+          <div className='flex justify-center items-center min-h-screen bg-background'>
+            <div className='p-8 w-full max-w-2xl bg-card rounded-lg shadow-lg border border-border'>
+              <div className="space-y-8">
+                <div className="flex items-center space-x-4">
+                  <FaPen className="icon-primary text-primary" />
+                  <h1 className="heading-secondary">Craft Your Tale</h1>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <Input
+                    className='w-full bg-background text-foreground placeholder-muted-foreground px-5 py-10'
+                    placeholder='Once upon a time...'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <Textarea
+                    rows={10}
+                    className='w-full bg-background text-foreground placeholder-muted-foreground resize-none p-5'
+                    placeholder='Your story unfolds here...'
+                    onChange={handleTextChange}
+                    maxLength={5000}
+                    value={content}
+                  />
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-muted-foreground">
+                      {characterCount}/5000 characters
+                    </span>
+                    <button
+                      type="submit"
+                      className='btn btn-primary'
+                    >
+                      Publish Your Tale
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </Suspense>
+      </div>
+    </div>
+
   );
 };
 

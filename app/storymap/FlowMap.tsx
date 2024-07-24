@@ -231,13 +231,13 @@ export default function FlowMap() {
               nodeTypes={nodeTypes}
               colorMode={theme === "dark" ? "dark" : "light"}
             >
-              <ControlPanel
+              {/* <ControlPanel
                 selectedStories={selectedStories}
                 favoritedStories={favoritedStories}
                 removeStory={removeStory}
                 controls={<Controls className='horizontal' />}
 
-              />
+              /> */}
               <Background gap={12} size={1} />
             </ReactFlow>
           </div>

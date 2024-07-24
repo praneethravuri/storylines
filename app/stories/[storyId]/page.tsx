@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock, User } from 'lucide-react';
 import LoadingScreen from '@/components/LoadingScreen';
+import { SidebarNav } from "@/components/SidebarNav"
 
 interface StoryData {
   title: string;
@@ -105,62 +106,70 @@ const Page = ({ params }: { params: { storyId: string } }) => {
     isLoading ? (
       <LoadingScreen />
     ) : (
-      <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-4xl">
-        <main className="bg-card shadow-xl rounded-lg overflow-hidden mb-12">
-          <div className="p-8">
-            <h1 className="text-4xl font-bold mb-4 text-card-foreground">{storyDetails.title}</h1>
-            <div className="flex items-center text-muted-foreground mb-6">
-              <User size={20} className="mr-2" />
-              <span>{storyDetails.author}</span>
-            </div>
-            <div className="prose dark:prose-invert max-w-none">
-              <p className="text-card-foreground leading-relaxed whitespace-pre-line">
-                {storyDetails.content}
-              </p>
-            </div>
-          </div>
-        </main>
+      <div className='h-screen flex'>
+        <div className='flex-shrink-0'>
+          <SidebarNav />
+        </div>
+        <div className='flex-grow overflow-auto'>
+          <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto max-w-4xl">
+              <main className="bg-card shadow-xl rounded-lg overflow-hidden mb-12">
+                <div className="p-8">
+                  <h1 className="text-4xl font-bold mb-4 text-card-foreground">{storyDetails.title}</h1>
+                  <div className="flex items-center text-muted-foreground mb-6">
+                    <User size={20} className="mr-2" />
+                    <span>{storyDetails.author}</span>
+                  </div>
+                  <div className="prose dark:prose-invert max-w-none">
+                    <p className="text-card-foreground leading-relaxed whitespace-pre-line">
+                      {storyDetails.content}
+                    </p>
+                  </div>
+                </div>
+              </main>
 
-        <section className="mb-12">
-          <h2 className="heading-landing mb-8 text-center">Story Timeline</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="heading-medium mb-4">Previous Stories</h3>
-              {prevStories.length > 0 ? (
-                prevStories.map((story, index) => (
-                  <div key={index} className="mb-4">
-                    <StoryCard
-                      story={story}
-                      direction="prev"
-                      onSelect={() => handleSelectStory(story.customId)}
-                    />
+              <section className="mb-12">
+                <h2 className="heading-landing mb-8 text-center">Story Timeline</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="heading-medium mb-4">Previous Stories</h3>
+                    {prevStories.length > 0 ? (
+                      prevStories.map((story, index) => (
+                        <div key={index} className="mb-4">
+                          <StoryCard
+                            story={story}
+                            direction="prev"
+                            onSelect={() => handleSelectStory(story.customId)}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-muted-foreground italic">This is the beginning of the story.</p>
+                    )}
                   </div>
-                ))
-              ) : (
-                <p className="text-muted-foreground italic">This is the beginning of the story.</p>
-              )}
-            </div>
-            <div>
-              <h3 className="heading-medium mb-4">Continue the Story</h3>
-              {nextStories.length > 0 ? (
-                nextStories.map((story, index) => (
-                  <div key={index} className="mb-4">
-                    <StoryCard
-                      story={story}
-                      direction="next"
-                      onSelect={() => handleSelectStory(story.customId)}
-                    />
+                  <div>
+                    <h3 className="heading-medium mb-4">Continue the Story</h3>
+                    {nextStories.length > 0 ? (
+                      nextStories.map((story, index) => (
+                        <div key={index} className="mb-4">
+                          <StoryCard
+                            story={story}
+                            direction="next"
+                            onSelect={() => handleSelectStory(story.customId)}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-muted-foreground italic">This story has reached its conclusion.</p>
+                    )}
                   </div>
-                ))
-              ) : (
-                <p className="text-muted-foreground italic">This story has reached its conclusion.</p>
-              )}
+                </div>
+              </section>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+
     )
   );
 };
