@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingPage from './(landingpage)/page';
+import LandingPage from './(landingpage)/LandingPage';
 
 const page = () => {
   return (
