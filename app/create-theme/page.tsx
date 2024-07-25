@@ -36,6 +36,7 @@ const CreateThemeRoom = () => {
                 toast({
                     title: "Theme room created successfully",
                     description: "Your new realm awaits exploration.",
+                    variant : "success"
                 });
                 setName('');
                 setDescription('');
@@ -90,7 +91,7 @@ const CreateThemeRoom = () => {
                                         <Textarea
                                             id="description"
                                             rows={4}
-                                            className='w-full mt-1'
+                                            className='w-full mt-1 text-base'
                                             placeholder='Describe your theme room'
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
