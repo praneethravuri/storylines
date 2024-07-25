@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from '@/components/ui/use-toast';
 import { FaPen, FaSpinner } from 'react-icons/fa';
-import { SidebarNav } from "@/components/SidebarNav"
+import { SidebarNav } from "@/components/SidebarNav";
 
 const Loading = () => (
   <div className='flex justify-center items-center min-h-screen'>
@@ -38,6 +38,9 @@ const CreateStory = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    const themeRoomId = searchParams.get('themeRoomId');
+    const type = searchParams.get('type');
+
     try {
       const response = await fetch('/api/create-story', {
         method: 'POST',
@@ -49,6 +52,8 @@ const CreateStory = () => {
           content,
           prev: currId ? [currId] : [],
           next: [],
+          type,
+          themeRoomId,
         }),
       });
 
@@ -60,7 +65,7 @@ const CreateStory = () => {
         setTitle('');
         setContent('');
         setCharacterCount(0);
-        router.push('/storymap');
+        router.push(`/storymap?themeRoomId=${themeRoomId}`);
       } else {
         toast({
           title: "Failed to submit story",
@@ -125,7 +130,6 @@ const CreateStory = () => {
         </Suspense>
       </div>
     </div>
-
   );
 };
 

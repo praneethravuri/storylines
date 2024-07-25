@@ -8,6 +8,7 @@ export interface NodeItems {
   author: string;
   createdAt: string;
   currId: string;
+  themeRoomId: string;
   isSelected: boolean;
   isFavorited: boolean;
   onSelect: (id: string) => void;
@@ -26,6 +27,7 @@ const NodeCard: React.FC<NodeItems> = ({
   author,
   createdAt,
   currId,
+  themeRoomId,
   isSelected,
   onSelect,
   isFavorited,
@@ -71,7 +73,7 @@ const NodeCard: React.FC<NodeItems> = ({
               />
             )}
             {icon === 'plus' && (
-              <Link href={`/create-story?currId=${currId}`}>
+              <Link href={`/create-story?currId=${currId}&themeRoomId=${themeRoomId}`}>
                 <BadgePlus
                   className={`w-3.5 h-3.5 ${
                     isDark

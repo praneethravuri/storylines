@@ -14,7 +14,7 @@ import '@xyflow/react/dist/style.css';
 import { useTheme } from "next-themes";
 import NodeCard from './NodeCard';
 import ControlPanel from './ControlPanel';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import LoadingScreen from '@/components/LoadingScreen';
 
 export interface NodeData {
@@ -26,6 +26,7 @@ export interface NodeData {
   isFavorited: boolean;
   onSelect: (id: string) => void;
   onFavorite: (id: string) => void;
+  themeRoomId: string;
 }
 
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
@@ -44,6 +45,7 @@ const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
         isFavorited={data.isFavorited}
         onSelect={data.onSelect}
         onFavorite={data.onFavorite}
+        themeRoomId={data.themeRoomId}
       />
       <Handle type="source" position={Position.Bottom} className="!bg-transparent" />
     </>
@@ -60,6 +62,8 @@ export default function FlowMap() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const themeRoomId = searchParams.get('themeRoomId');
 
   const selectedStories = useMemo(() => {
     return nodes.filter(node => selectedStoryIds.has(node.id)).map(node => node.data);
@@ -167,10 +171,13 @@ export default function FlowMap() {
 
   useEffect(() => {
     const fetchStories = async () => {
+      if (!themeRoomId) return;
+
       try {
         setIsLoading(true);
-        const response = await fetch('/api/fetch-all-stories');
+        const response = await fetch(`/api/stories-by-theme?themeRoomId=${themeRoomId}`);
         const stories = await response.json();
+        console.log(JSON.stringify(stories))
         const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
 
         setNodes(constructedNodes.map(node => ({
@@ -180,7 +187,8 @@ export default function FlowMap() {
             isSelected: false,
             isFavorited: false,
             onSelect: onSelect,
-            onFavorite: onFavorite
+            onFavorite: onFavorite,
+            themeRoomId: themeRoomId
           }
         })));
 
@@ -193,7 +201,7 @@ export default function FlowMap() {
     };
 
     fetchStories();
-  }, [screenSize, setNodes, setEdges, onSelect, onFavorite]);
+  }, [screenSize, setNodes, setEdges, onSelect, onFavorite, themeRoomId]);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -214,7 +222,7 @@ export default function FlowMap() {
             <p className="text-2xl mb-4">No stories found.</p>
             <button
               className="btn btn-primary"
-              onClick={() => router.push('/create-story?type=root')}
+              onClick={() => router.push(`/create-story?type=root&themeRoomId=${themeRoomId}`)}
             >
               Create a Root Story
             </button>
@@ -231,13 +239,6 @@ export default function FlowMap() {
               nodeTypes={nodeTypes}
               colorMode={theme === "dark" ? "dark" : "light"}
             >
-              {/* <ControlPanel
-                selectedStories={selectedStories}
-                favoritedStories={favoritedStories}
-                removeStory={removeStory}
-                controls={<Controls className='horizontal' />}
-
-              /> */}
               <Background gap={12} size={1} />
             </ReactFlow>
           </div>
@@ -246,6 +247,7 @@ export default function FlowMap() {
     )
   );
 }
+
 
 
 function constructNodesAndEdges(stories: any[], screenSize: { width: number, height: number }) {
