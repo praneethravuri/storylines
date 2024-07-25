@@ -46,7 +46,7 @@ export function SidebarNav() {
         "h-screen"
       )}
     >
-      <Sidebar open={open} setOpen={setOpen}>
+      <Sidebar open={open} setOpen={setOpen} >
         <SidebarBody className="flex flex-col justify-between h-full">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}

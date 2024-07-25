@@ -44,19 +44,19 @@ const ThemeRoomsPage = () => {
     }
 
     return (
-        <div className="min-h-screen text-foreground">
+        <div className="min-h-screen text-foreground overflow-y-hidden">
             <div className="flex">
                 <div className="flex-shrink-0">
                     <SidebarNav />
                 </div>
-                <div className="flex-grow p-8">
+                <div className="flex-grow p-8 overflow-y-auto">
                     <div className="max-w-7xl mx-auto">
                         <div className="flex justify-between items-center mb-8">
                             <h1 className="text-4xl font-bold">Theme Rooms</h1>
-                            <button className="btn btn-primary flex items-center gap-2">
+                            <Link href="/create-theme" className="btn btn-primary flex items-center gap-2">
                                 <Plus size={20} />
-                                Create Room
-                            </button>
+                                <p className='hidden md:block'>Create Room</p>
+                            </Link>
                         </div>
                         <div className="relative mb-6">
                             <input
@@ -76,7 +76,7 @@ const ThemeRoomsPage = () => {
                                         <p className="text-muted-foreground mb-4 flex-grow">{room.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {room.tags.map((tag, index) => (
-                                                <span key={index} className="text-xs font-medium bg-accent text-accent-foreground px-2 py-1 rounded-full">
+                                                <span key={index} className="text-xs font-medium bg-background text-foreground px-2 py-1 rounded-full">
                                                     {capitalize(tag)}
                                                 </span>
                                             ))}
