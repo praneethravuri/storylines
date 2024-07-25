@@ -13,6 +13,7 @@ export interface IStory extends Document {
     next: string[];
     type?: string;
     customId: string;
+    themeRoomId: mongoose.Types.ObjectId;
 }
 
 const StorySchema: Schema = new Schema({
@@ -23,11 +24,11 @@ const StorySchema: Schema = new Schema({
     prev: [{ type: String }],
     next: [{ type: String }],
     type: { type: String },
-    customId: { type: String, unique: true, required: true }
+    customId: { type: String, unique: true, required: true },
+    themeRoomId: { type: mongoose.Schema.Types.ObjectId, ref: 'ThemeRoom', required: true }
 });
 
 let Story: Model<IStory>;
-
 try {
     Story = mongoose.model<IStory>('Story');
 } catch {

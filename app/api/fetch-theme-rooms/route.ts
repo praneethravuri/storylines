@@ -1,12 +1,13 @@
-import ThemeRoom from "@/schema/themeRoomSchema";
-import { connectToDB } from "@/utils/connectToDb";
+import { connectToDB } from '@/utils/connectToDb';
+import ThemeRoom from '@/schema/themeRoomSchema';
 
-export async function GET() {
-    try {
+export async function GET(){
+    try{
         await connectToDB();
-        const themeRooms = await ThemeRoom.find().lean();
+        const themeRooms = await ThemeRoom.find().lean()
         return new Response(JSON.stringify(themeRooms), { status: 200 });
-    } catch (err) {
+    }
+    catch (err) {
         console.error(err);
         return new Response(JSON.stringify({ message: "Error fetching theme rooms", err }), { status: 500 });
     }

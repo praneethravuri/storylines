@@ -33,6 +33,7 @@ const ThemeRoomsPage = () => {
         fetchThemeRooms();
     }, []);
 
+
     const filteredRooms = themeRooms.filter(room =>
         room.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         room.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,7 +71,7 @@ const ThemeRoomsPage = () => {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {filteredRooms.map((room) => (
-                                <Link href="/storymap" key={room.id} className="group">
+                                <Link href={`/storymap?themeRoomId=${room._id}`} key={room._id} className="group">
                                     <div className="bg-secondary rounded-xl p-6 h-full flex flex-col transition-all duration-300 ease-in-out group-hover:shadow-lg group-hover:-translate-y-1">
                                         <h2 className="text-xl font-semibold mb-2">{room.name}</h2>
                                         <p className="text-muted-foreground mb-4 flex-grow">{room.description}</p>
