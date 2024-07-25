@@ -42,7 +42,7 @@ const CreateStory = () => {
     const type = searchParams.get('type');
 
     try {
-      const response = await fetch('/api/create-story', {
+      const response = await fetch('/api/stories-api/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +61,7 @@ const CreateStory = () => {
         toast({
           title: "Story created successfully",
           description: "Your tale has been added to the narrative tapestry.",
+          variant : "success"
         });
         setTitle('');
         setContent('');

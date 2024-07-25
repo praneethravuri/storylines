@@ -65,13 +65,13 @@ const Page = ({ params }: { params: { storyId: string } }) => {
     const fetchStoryDetails = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`/api/fetch-one-story?storyId=${params.storyId}`);
+        const response = await fetch(`/api/stories-api/fetch-one?storyId=${params.storyId}`);
         if (response.ok) {
           const data: StoryData = await response.json();
           setStoryDetails(data);
 
           const fetchLinkedStories = async (ids: string[]): Promise<NodeDetails[]> => {
-            const responses = await Promise.all(ids.map(id => fetch(`/api/fetch-one-story?storyId=${id}`)));
+            const responses = await Promise.all(ids.map(id => fetch(`/api/stories-api/fetch-one?storyId=${id}`)));
             const stories: StoryData[] = await Promise.all(responses.map(res => res.json()));
             return stories.map(({ title, author, createdAt, customId }) => ({ title, author, createdAt, customId }));
           };

@@ -35,6 +35,14 @@ export interface NodeData {
   themeRoomId: string;
 }
 
+interface ThemeRoom {
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  tags: string[];
+}
+
 const CustomNode: React.FC<{ data: NodeData }> = ({ data }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -66,6 +74,8 @@ export default function FlowMap() {
   const [selectedStoryIds, setSelectedStoryIds] = useState(new Set<string>());
   const [favoritedStoryIds, setFavoritedStoryIds] = useState(new Set<string>());
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [themeRoomDetails, setThemeRoomDetails] = useState<ThemeRoom[]>([]);
+
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -181,7 +191,7 @@ export default function FlowMap() {
 
       try {
         setIsLoading(true);
-        const response = await fetch(`/api/stories-by-theme?themeRoomId=${themeRoomId}`);
+        const response = await fetch(`/api/theme-room-api/fetch-all-stories?themeRoomId=${themeRoomId}`);
         const stories = await response.json();
         console.log(JSON.stringify(stories))
         const { constructedNodes, constructedEdges } = constructNodesAndEdges(stories, screenSize);
@@ -209,6 +219,26 @@ export default function FlowMap() {
     fetchStories();
   }, [screenSize, setNodes, setEdges, onSelect, onFavorite, themeRoomId]);
 
+  useEffect(() => {
+    const fetchThemeRoomDetails = async () => {
+      try {
+        setIsLoading(true)
+        const response = await fetch(`/api/theme-room-api/fetch-one?themeRoomId=${themeRoomId}`);
+        if (response.ok) {
+          const themeRoom = await response.json();
+          setThemeRoomDetails(themeRoom)
+        }
+      } catch (error) {
+        console.error('Error fetching theme room details:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchThemeRoomDetails();
+
+  }, [themeRoomId])
+
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
@@ -218,30 +248,44 @@ export default function FlowMap() {
     custom: CustomNode,
   };
 
-  const HoverCardComponent = () => (
-    <div className="absolute top-4 right-4 z-10">
-      <HoverCard>
-        <HoverCardTrigger asChild>
-          <button className="px-4 py-2 btn btn-primary">
-            Hover for Info
-          </button>
-        </HoverCardTrigger>
-        <HoverCardContent className="w-80">
-          <p>This is a flow map of interconnected stories. Each node represents a story, and the lines show how stories are related to each other.</p>
-          {nodes.length === 0 && (
-            <p className="mt-2 text-sm text-gray-500">Currently, there are no stories in this flow map. Create a root story to get started!</p>
-          )}
-        </HoverCardContent>
-      </HoverCard>
-    </div>
-  );
+  // const HoverCardComponent = () => (
+  //   <div className="absolute top-4 right-4 z-10">
+  //     <HoverCard>
+  //       <HoverCardTrigger asChild>
+  //         <button className="px-4 py-2 btn btn-primary">
+  //           {themeRoomDetails.name}
+  //         </button>
+  //       </HoverCardTrigger>
+  //       <HoverCardContent className="w-80">
+  //         <h3 className="text-lg font-semibold">{themeRoomDetails.name}</h3>
+  //         <p className="text-sm text-gray-600">{themeRoomDetails.description}</p>
+  //         <p className="mt-2 text-sm text-gray-500">Created on: {new Date(themeRoomDetails.createdAt).toLocaleDateString()}</p>
+  //         <p className="text-sm text-gray-500">Last updated: {new Date(themeRoomDetails.updatedAt).toLocaleDateString()}</p>
+  //         {themeRoomDetails.tags.length > 0 && (
+  //           <div className="mt-2">
+  //             <span className="font-semibold">Tags:</span>
+  //             <ul className="list-disc ml-4 text-sm text-gray-600">
+  //               {themeRoomDetails.tags.map(tag => (
+  //                 <li key={tag}>{tag}</li>
+  //               ))}
+  //             </ul>
+  //           </div>
+  //         )}
+  //         {nodes.length === 0 && (
+  //           <p className="mt-2 text-sm text-gray-500">Currently, there are no stories in this flow map. Create a root story to get started!</p>
+  //         )}
+  //       </HoverCardContent>
+  //     </HoverCard>
+  //   </div>
+  // );
+
 
   return (
     isLoading ? (
       <LoadingScreen />
     ) : (
       <div className="h-screen relative">
-        <HoverCardComponent />
+        {/* <HoverCardComponent /> */}
         {nodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <p className="text-2xl mb-4">No stories found.</p>
@@ -264,6 +308,7 @@ export default function FlowMap() {
               nodeTypes={nodeTypes}
               colorMode={theme === "dark" ? "dark" : "light"}
             >
+              <Controls />
               <Background gap={12} size={1} />
             </ReactFlow>
           </div>

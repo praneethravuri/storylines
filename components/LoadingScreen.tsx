@@ -22,7 +22,7 @@ const LoadingScreen = () => {
     }, []); // Empty dependency array ensures this runs only once after the initial render
 
     return (
-        <div className={`fixed inset-0 flex items-center justify-center bg-background z-100`}>
+        <div className={`fixed inset-0 flex items-center justify-center bg-background z-[10001]`}>
             <WordRotate
                 className="text-4xl font-bold text-black dark:text-white"
                 words={shuffledWords}

@@ -20,7 +20,7 @@ const CreateThemeRoom = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/create-theme', {
+            const response = await fetch('/api/theme-room-api/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const CreateThemeRoom = () => {
                 setName('');
                 setDescription('');
                 setTags('');
-                router.push('/theme-rooms');
+                router.push('/home');
             } else {
                 const errorData = await response.json();
                 toast({

@@ -18,7 +18,7 @@ const ThemeRoomsPage = () => {
         const fetchThemeRooms = async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch("/api/fetch-theme-rooms");
+                const response = await fetch("/api/theme-room-api/fetch-all");
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
