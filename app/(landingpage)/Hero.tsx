@@ -50,7 +50,7 @@ const Hero = () => {
     </p>
     <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10">
       <button className="btn btn-primary">Start Writing</button>
-      <Link href="/storymap" className="btn btn-outline group">
+      <Link href="/home" className="btn btn-outline group">
         Explore Stories <FaArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
       </Link>
     </div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { SidebarNav } from "@/components/SidebarNav";
 import Link from 'next/link';
 import LoadingScreen from '@/components/LoadingScreen';
+import { Badge } from "@/components/ui/badge";
 
 const ThemeRoomsPage = () => {
     const [themeRooms, setThemeRooms] = useState([]);
@@ -43,8 +44,13 @@ const ThemeRoomsPage = () => {
                     {themeRooms.map((room) => (
                         <div key={room.id}>
                             <Link href="/storymap" className="h-[300px] w-full bg-secondary rounded-xl p-4 flex flex-col">
-                                    <h2 className="heading-secondary">{room.name}</h2>
-                                    <p>{room.description}</p>
+                                <h2 className="heading-secondary">{room.name}</h2>
+                                <p>{room.description}</p>
+                                <div className="tags mt-auto flex flex-wrap gap-2">
+                                    {room.tags.map((tag, index) => (
+                                        <Badge className='bg-muted' key={index}>{tag}</Badge>
+                                    ))}
+                                </div>
                             </Link>
                         </div>
                     ))}
