@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { SidebarNav } from "@/components/SidebarNav";
 import Link from 'next/link';
 import LoadingScreen from '@/components/LoadingScreen';
+import { Search, Plus } from 'lucide-react';
 
 const ThemeRoomsPage = () => {
     const [themeRooms, setThemeRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const capitalize = (word) => {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
@@ -28,35 +30,62 @@ const ThemeRoomsPage = () => {
                 setIsLoading(false);
             }
         };
-
         fetchThemeRooms();
     }, []);
+
+    const filteredRooms = themeRooms.filter(room =>
+        room.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        room.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        room.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     if (isLoading) {
         return <LoadingScreen />;
     }
 
     return (
-        <div className="h-screen flex">
-            <div className="flex-shrink-0">
-                <SidebarNav />
-            </div>
-            <div className="flex-grow overflow-auto p-4">
-                <h1 className="heading-secondary mb-2">Theme Rooms</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {themeRooms.map((room) => (
-                        <div key={room.id}>
-                            <Link href="/storymap" className="h-[300px] w-full bg-secondary rounded-xl p-4 flex flex-col transition-all duration-300 ease-in-out hover:scale-105">
-                                    <h2 className="heading-secondary">{room.name}</h2>
-                                    <p>{room.description}</p>
-                                    <div className="tags mt-auto flex flex-wrap gap-2">
-                                        {room.tags.map((tag, index) => (
-                                            <p className='text-xs font-semibold text-white bg-neutral-900 px-2 py-1 rounded-full' key={index}>{capitalize(tag)}</p>
-                                        ))}
-                                    </div>
-                            </Link>
+        <div className="min-h-screen text-foreground">
+            <div className="flex">
+                <div className="flex-shrink-0">
+                    <SidebarNav />
+                </div>
+                <div className="flex-grow p-8">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex justify-between items-center mb-8">
+                            <h1 className="text-4xl font-bold">Theme Rooms</h1>
+                            <button className="btn btn-primary flex items-center gap-2">
+                                <Plus size={20} />
+                                Create Room
+                            </button>
                         </div>
-                    ))}
+                        <div className="relative mb-6">
+                            <input
+                                type="text"
+                                placeholder="Search rooms..."
+                                className="w-full px-4 py-2 pl-10 bg-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredRooms.map((room) => (
+                                <Link href="/storymap" key={room.id} className="group">
+                                    <div className="bg-secondary rounded-xl p-6 h-full flex flex-col transition-all duration-300 ease-in-out group-hover:shadow-lg group-hover:-translate-y-1">
+                                        <h2 className="text-xl font-semibold mb-2">{room.name}</h2>
+                                        <p className="text-muted-foreground mb-4 flex-grow">{room.description}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {room.tags.map((tag, index) => (
+                                                <span key={index} className="text-xs font-medium bg-accent text-accent-foreground px-2 py-1 rounded-full">
+                                                    {capitalize(tag)}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
