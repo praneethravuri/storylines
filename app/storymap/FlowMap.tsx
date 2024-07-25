@@ -16,6 +16,12 @@ import NodeCard from './NodeCard';
 import ControlPanel from './ControlPanel';
 import { useRouter, useSearchParams } from 'next/navigation';
 import LoadingScreen from '@/components/LoadingScreen';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 
 export interface NodeData {
   title: string;
@@ -212,11 +218,30 @@ export default function FlowMap() {
     custom: CustomNode,
   };
 
+  const HoverCardComponent = () => (
+    <div className="absolute top-4 right-4 z-10">
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <button className="px-4 py-2 btn btn-primary">
+            Hover for Info
+          </button>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-80">
+          <p>This is a flow map of interconnected stories. Each node represents a story, and the lines show how stories are related to each other.</p>
+          {nodes.length === 0 && (
+            <p className="mt-2 text-sm text-gray-500">Currently, there are no stories in this flow map. Create a root story to get started!</p>
+          )}
+        </HoverCardContent>
+      </HoverCard>
+    </div>
+  );
+
   return (
     isLoading ? (
       <LoadingScreen />
     ) : (
       <div className="h-screen relative">
+        <HoverCardComponent />
         {nodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <p className="text-2xl mb-4">No stories found.</p>
