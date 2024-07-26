@@ -1,53 +1,34 @@
-@layer base {
-    :root {
-        /* Light Theme Primary Colors */
-        --color-primary-100: #d1c9fe;
-        --color-primary-200: #b3a7fd;
-        --color-primary-300: #9585fc;
-        --color-primary-400: #7663fa;
-        --color-primary-500: #5841f9;
-        --color-primary-600: #3a1ff7;
-
-        /* Light Theme Surface Colors */
-        --color-surface-100: #ffffff;
-        --color-surface-200: #f5f5f5;
-        --color-surface-300: #e0e0e0;
-        --color-surface-400: #cccccc;
-        --color-surface-500: #b8b8b8;
-        --color-surface-600: #a3a3a3;
-
-        /* Light Theme Mixed Surface Colors */
-        --color-surface-mixed-100: #f7f6fa;
-        --color-surface-mixed-200: #e9e7f0;
-        --color-surface-mixed-300: #dbd8e6;
-        --color-surface-mixed-400: #cdc9dc;
-        --color-surface-mixed-500: #bfbad2;
-        --color-surface-mixed-600: #b1abc8;
-    }
-
-    .dark {
-        /* Dark Theme Primary Colors */
-        --color-primary-100: #382bf0;
-        --color-primary-200: #5e43f3;
-        --color-primary-300: #7a5af5;
-        --color-primary-400: #9171f8;
-        --color-primary-500: #a688fa;
-        --color-primary-600: #ba9ffb;
-
-        /* Dark Theme Surface Colors */
-        --color-surface-100: #121212;
-        --color-surface-200: #282828;
-        --color-surface-300: #3f3f3f;
-        --color-surface-400: #575757;
-        --color-surface-500: #717171;
-        --color-surface-600: #8b8b8b;
-
-        /* Dark Theme Mixed Surface Colors */
-        --color-surface-mixed-100: #1a1625;
-        --color-surface-mixed-200: #2f2b3a;
-        --color-surface-mixed-300: #46424f;
-        --color-surface-mixed-400: #5e5a66;
-        --color-surface-mixed-500: #76737e;
-        --color-surface-mixed-600: #908d96;
-    }
-}
+:root {
+    --neutral-50: 0 0% 98%;
+    --neutral-100: 0 0% 96%;
+    --neutral-200: 0 0% 90%;
+    --neutral-300: 0 0% 83%;
+    --neutral-400: 0 0% 64%;
+    --neutral-500: 0 0% 45%;
+    --neutral-600: 0 0% 32%;
+    --neutral-700: 0 0% 25%;
+    --neutral-800: 0 0% 15%;
+    --neutral-900: 0 0% 9%;
+    --neutral-950: 0 0% 4%;
+  
+    --purple-50: 270 100% 98%;
+    --purple-100: 268 100% 95%;
+    --purple-200: 268 100% 91%;
+    --purple-300: 269 100% 85%;
+    --purple-400: 270 100% 75%;
+    --purple-500: 271 100% 65%;
+    --purple-600: 271 100% 55%;
+    --purple-700: 272 100% 45%;
+    --purple-800: 273 100% 36%;
+    --purple-900: 274 100% 30%;
+    --purple-950: 275 100% 20%;
+  
+    --emerald-500: 160 84% 39%;
+    --emerald-400: 158 64% 52%;
+  
+    --amber-500: 38 92% 50%;
+    --amber-400: 43 96% 56%;
+  
+    --red-500: 0 84% 60%;
+    --red-400: 0 91% 71%;
+  }

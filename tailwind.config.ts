@@ -92,7 +92,6 @@ const config = {
         orbit: "orbit calc(var(--duration)*1s) linear infinite",
         marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
-
       },
     },
   },

@@ -1,151 +1,137 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
+@import url(./_colors.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 240 10% 3.9%;
-      --card: 0 0% 100%;
-      --card-foreground: 240 10% 3.9%;
-      --popover: 0 0% 100%;
-      --popover-foreground: 240 10% 3.9%;
-      --primary: 275 100% 50%; /* Purple shade */
-      --primary-foreground: 0 0% 100%;
-      --secondary: 240 4.8% 95.9%;
-      --secondary-foreground: 240 5.9% 10%;
-      --muted: 240 4.8% 95.9%;
-      --muted-foreground: 240 3.8% 46.1%;
-      --accent: 240 4.8% 95.9%;
-      --accent-foreground: 240 5.9% 10%;
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 240 5.9% 90%;
-      --input: 240 5.9% 90%;
-      --ring: 275 100% 50%; /* Purple shade */
-      --radius: 0.5rem;
-      --secondary-glow: conic-gradient(
-        from 10deg at 50% 50%,
-        #eb7494 0deg,
-        #ae77b2 55deg,
-        #97b5da 120deg,
-        #0099ca 160deg,
-        transparent 360deg
-      );
-    
-      --third-glow: conic-gradient(
-        from 90deg at 50% 50%,
-        #ff8b7e 0deg,
-        #e24e6b 160deg,
-        #7ed2da 120deg,
-        #8bdce0 55deg,
-        transparent 360deg
-      );
-    }
+  :root {
+    --background: var(--neutral-50);
+    --foreground: var(--neutral-950);
 
-    .dark {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 98%;
-      --card: 240 10% 3.9%;
-      --card-foreground: 0 0% 98%;
-      --popover: 240 10% 3.9%;
-      --popover-foreground: 0 0% 98%;
-      --primary: 275 100% 50%; /* Purple shade */
-      --primary-foreground: 0 0% 100%;
-      --secondary: 240 3.7% 15.9%;
-      --secondary-foreground: 0 0% 98%;
-      --muted: 240 3.7% 15.9%;
-      --muted-foreground: 240 5% 64.9%;
-      --accent: 240 3.7% 15.9%;
-      --accent-foreground: 0 0% 98%;
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 240 3.7% 15.9%;
-      --input: 240 3.7% 15.9%;
-      --ring: 275 100% 50%; /* Purple shade */
-    }
+    --card: var(--neutral-50);
+    --card-foreground: var(--neutral-950);
+
+    --popover: var(--neutral-50);
+    --popover-foreground: var(--neutral-950);
+
+    --primary: var(--purple-600);
+    --primary-foreground: var(--neutral-50);
+
+    --secondary: var(--neutral-100);
+    --secondary-foreground: var(--neutral-950);
+
+    --muted: var(--neutral-100);
+    --muted-foreground: var(--neutral-500);
+
+    --accent: var(--purple-100);
+    --accent-foreground: var(--purple-900);
+
+    --destructive: var(--red-500);
+    --destructive-foreground: var(--neutral-50);
+
+    --border: var(--neutral-200);
+    --input: var(--neutral-200);
+    --ring: var(--purple-600);
+
+    --radius: 0.5rem;
   }
 
-  html {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+  .dark {
+    --background: var(--neutral-950);
+    --foreground: var(--neutral-50);
 
-  body {
-    @apply bg-background text-foreground;
-    letter-spacing: -0.5px;
-    font-weight: 400;
-  }
+    --card: var(--neutral-950);
+    --card-foreground: var(--neutral-50);
 
-  * {
-    @apply border-border;
-  }
+    --popover: var(--neutral-950);
+    --popover-foreground: var(--neutral-50);
 
+    --primary: var(--purple-400);
+    --primary-foreground: var(--neutral-950);
+
+    --secondary: var(--neutral-800);
+    --secondary-foreground: var(--neutral-50);
+
+    --muted: var(--neutral-800);
+    --muted-foreground: var(--neutral-400);
+
+    --accent: var(--purple-900);
+    --accent-foreground: var(--purple-100);
+
+    --destructive: var(--red-900);
+    --destructive-foreground: var(--neutral-50);
+
+    --border: var(--neutral-800);
+    --input: var(--neutral-800);
+    --ring: var(--purple-400);
+  }
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  @apply bg-background text-foreground;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+}
+
+* {
+  @apply border-border;
+}
 
 @layer components {
   .btn {
     @apply px-4 py-2 rounded-full font-semibold transition-colors duration-200;
   }
-
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary/90;
   }
-
   .btn-secondary {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
-
   .btn-outline {
     @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
   }
-
   .nav-link {
     @apply text-muted-foreground hover:text-foreground transition-colors duration-200 text-lg;
   }
-
   .heading-primary {
     @apply text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight;
   }
-
   .heading-secondary {
     @apply text-2xl font-bold text-foreground mb-2;
   }
-
   .heading-landing {
-    @apply text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight
+    @apply text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight;
   }
-
   .paragraph-primary {
     @apply text-lg sm:text-xl text-muted-foreground tracking-tight;
   }
-
   .paragraph-secondary {
     @apply text-base font-medium text-muted-foreground;
   }
-
   .icon-primary {
     @apply text-foreground w-8 h-8;
   }
-
   .icon-secondary {
     @apply w-5 h-5;
   }
-
   .link-primary {
-    @apply text-2xl font-bold
+    @apply text-2xl font-bold text-primary hover:text-primary/80;
   }
-
   .node-card-dark {
     background-color: color-mix(in srgb, #9500FF, #121212 97%);
   }
-
   .node-card-light {
     background-color: color-mix(in srgb, #9500FF, #ffffff 90%);
   }
-
   .node-card {
-    @apply w-72 p-4 rounded-xl shadow-md relative overflow-visible border-border transition-all duration-300 hover:shadow-xl hover:scale-105
+    @apply w-72 p-4 rounded-xl shadow-md relative overflow-visible border-border transition-all duration-300 hover:shadow-xl hover:scale-105;
   }
 }
 
