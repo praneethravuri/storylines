@@ -2,7 +2,12 @@
 
 A free and open-source storytelling platform that empowers you to create, contribute, and craft your own unique narratives.
 
-[Go to App](#) | [Documentation](#)
+## Quick Links
+
+- [Full Documentation](https://github.com/praneethravuri/storylines-v2/tree/main/docs)
+- [Getting Started](https://github.com/praneethravuri/storylines-v2/tree/main/docs/getting-started.md)
+- [API Reference](https://github.com/praneethravuri/storylines-v2/tree/main/docs/api-reference.md)
+- [Contributing](https://github.com/praneethravuri/storylines-v2/tree/main/docs/contributing.md)
 
 ## Description
 
@@ -20,28 +25,33 @@ Start your storytelling journey with StoryLines today!
 * Visualize story progressions with interactive tree flow diagrams
 * Bookmark and organize your favorite stories
 * Develop your own unique storylines with multiple branching paths
+* Select your favorite stories and create your own storybook
 * Share your stories and storylines with the community
 * User-friendly and intuitive interface
 
 ## Tech Stack
 
-* **Next.js**
-* **React**
-* **TypeScript**
-* **MongoDB** with **Mongoose**
-* **Tailwind CSS**
-* **@xyflow/react**: Library for creating interactive node-based UIs and diagrams
-* **Framer Motion**
-* **Lucide React, React Icons, Radix Icons**: Icon library
-* **next-themes**
-* **Vercel**
+* Vite
+* Node.js
+* Express.js
+* React
+* TypeScript
+* MongoDB with Mongoose
+* Tailwind CSS
+* @xyflow/react
+* Framer Motion
+* Tabler Icons
+* Shad-cn
+* Magic-ui
 
-## Star History
+## Documentation
 
-<a href="https://star-history.com/#praneethravuri/storylines&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=praneethravuri/storylines&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=praneethravuri/storylines&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=praneethravuri/storylines&type=Date" />
- </picture>
-</a>
+For more detailed information about StoryLines, please refer to our [full documentation](https://github.com/praneethravuri/storylines-v2/tree/main/docs).
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/praneethravuri/storylines-v2/tree/main/docs/contributing.md) for more details.
+
+## License
+
+[MIT License](LICENSE)

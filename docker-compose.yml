@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  server:
+    image: pravdevrav/storylines-server:latest
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./server/.env.local
+
+  client:
+    image: pravdevrav/storylines-client:latest
+    ports:
+      - "3000:3000"

@@ -1,45 +1,49 @@
-# Contributing
+# Contributing to StoryLines
 
-Pull requests are welcome. For major changes, please [open a new issue](https://github.com/praneethravuri/storylines/issues/new) first to discuss what you would like to change.
+We appreciate your interest in contributing to StoryLines! Your contributions are valuable in making our platform better. This guide will help you understand how to contribute effectively.
 
-# Setup
+## Pull Request Guidelines
 
-1. Fork and clone the repo
+Don't be concerned if you're unsure about any of these guidelines. We're here to help and guide you through the process.
 
-2. Run ```npm i``` to install the dependencies
+### Pull Request Titles
 
-3. Create a branch for your **PR** with ```git checkout -b your-branch-name```
+Each pull request title should begin with a semantic prefix that describes the primary purpose of the changes:
 
-To keep master branch pointing to remote repository and make pull requests from branches on your fork, run:
+* **feat**: Introduces a new feature
+* **fix**: Addresses a bug
+* **docs**: Changes or adds documentation
+* **style**: Makes code style changes (whitespace, formatting, missing semicolons, etc.)
+* **refactor**: Improves code structure without changing functionality
+* **perf**: Enhances performance
+* **test**: Adds or modifies tests
+* **build**: Alters the build system or external dependencies
+* **ci**: Updates CI configuration files and scripts
+* **chore**: Performs routine tasks or maintenance
+* **revert**: Reverts a previous commit
 
-```bash
-git remote add upstream https://github.com/praneethravuri/storylines.git
-git fetch upstream
-git branch --set-upstream-to=upstream/master master
+Example of a well-formatted pull request title:
+```
+feat: implement search functionality for theme rooms
 ```
 
-# Pull Request Guidelines
+## Getting Started
 
+To contribute to StoryLines, follow these steps:
 
-* **feat**: A new feature
+1. Fork the repository on GitHub.
+2. Clone your forked repository to your local machine.
+3. Create a new branch for your contribution.
+4. Make and commit your changes.
+5. Push your changes to your fork on GitHub.
+6. Submit a pull request to the main StoryLines repository.
 
-* **fix**: A bug fix
+## Code of Conduct
 
-* **docs**: Documentation only changes
+By participating in this project, you agree to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Please read it before contributing.
 
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+## Questions or Concerns?
 
-* **refactor**: A code change that neither fixes a bug nor adds a feature
+If you have any questions or concerns, please don't hesitate to open an issue in the [Issues](https://github.com/praneethravuri/storylines-v2/issues) section of the repository.
 
-* **perf**: A code change that improves performance
-
-* **test**: Adding missing tests or correcting existing tests
-
-* **build**: Changes that affect the build system or external 
-* **dependencies (example scopes: gulp, broccoli, npm)
-
-* **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-
-* **chore**: Other changes that don't modify src or test files
-
-* **revert**: Reverts a previous commit
+Thank you for contributing to StoryLines! Your efforts help make our platform better for everyone.
